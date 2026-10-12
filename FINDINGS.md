@@ -55,7 +55,14 @@ Tables: `exp1_timing.md`, `latency_native.json`.
   - AR steers at |scale| ≥ 3 never end the song (they hit 9000 tokens);
   - a latent offset of 4, and the NAR L21 steer at 4 or more, break the audio.
 
-Tables: `exp2_prompt.md`, `exp2_seams.md`, `exp2c_steer_energy.md`.
+- Style axes at semantic layer 24 (whole-song steer, 4 held-out prompts, scales ±1–3; cosine with energy 0.41–0.56):
+  - density: + is a full band (crest −6 dB at +1, 4/4 clips), − is sparse;
+  - timbre: + is bright (centroid +1.3 kHz at +1, 4/4), − is warm and dark;
+  - tempo feel: no scale raised the onset rate (0–1 of 4 at every positive scale). It acts like an energy steer, so tempo stays a plan (`Q:`) control.
+  - Like energy, density and timbre are clean to −1, lose one clip in four at −2, and flatten the spectrum about 6× at +1. Layers 21 and 24 behave alike.
+  - Shipped as stream knobs `density` and `timbre` (brosoundml, [−1.5, 1]); `export_dirs.py` writes them into `yue2_style_directions.inc`.
+
+Tables: `exp2_prompt.md`, `exp2_seams.md`, `exp2c_steer_energy.md`, `exp2c_steer_{density,timbre,tempo}.md`.
 
 ## 4. Interrupt
 
@@ -73,7 +80,12 @@ Each run switches at 60 s and re-renders a 10 s span with the design window. An 
 - The AR L21 steer is a real arrangement change.
 - Re-prompting the style, re-prompting the plan's tempo or labels, or re-rolling the continuation all do about nothing mid-song: the song's own history dominates.
 
-Table: `exp3_interrupt.md`.
+- The style axes on a continuation (AR L24, scales −1.5, −1, 0.5, 1, folk and rock; `scripts/queue_style.sh`): every step at the switch is below 1 (−1.3 to +0.73, with the unsteered continuation at −1.3 to +0.18). Mid-song they do less than over a whole song, as every steer does:
+  - density +1: centroid +0.4–0.8 kHz, flatness 2–2.5×;
+  - timbre: inconsistent mid-song. Folk moved +0.8 kHz at 0.5 and not at 1; rock moved +0.6 kHz at 1.
+  - tempo: as in exp2c, no onset-rate change.
+
+Tables: `exp3_interrupt.md`, `exp3_{density,timbre,tempo}_interrupt.md`.
 
 ## 5. VRAM: why 14 GB, and about 5 GB to recover
 

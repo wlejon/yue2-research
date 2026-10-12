@@ -19,9 +19,15 @@ import meter
 ROOT = Path("runs/exp3")
 
 
-def main(songs):
-    lines = ["| song | condition | d_energy | d_lufs | d_centroid | d_onset | d_perc | span_mel | pre_mel | switch_z |",
-             "|---|---|---|---|---|---|---|---|---|---|"]
+def main(args):
+    # A leading runs/... argument is the run directory (interrupt.py --out);
+    # its tables are named after it.
+    global ROOT
+    songs = args
+    if args and args[0].startswith("runs/"):
+        ROOT, songs = Path(args[0]), args[1:]
+    lines = ["| song | condition | d_energy | d_lufs | d_centroid | d_onset | d_perc | d_crest | flat_x | span_mel | pre_mel | switch_z |",
+             "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     rows = []
     for song in songs:
         base = meter.load_run(ROOT / f"{song}_base")
@@ -47,17 +53,20 @@ def main(songs):
             row = dict(song=song, cond=d.name[len(song) + 1:], d_energy=f["energy"] - fb["energy"],
                        d_lufs=f["lufs"] - fb["lufs"], d_centroid=f["centroid_hz"] - fb["centroid_hz"],
                        d_onset=f["onset_rate"] - fb["onset_rate"], d_perc=f["perc_ratio"] - fb["perc_ratio"],
+                       d_crest=f["crest_db"] - fb["crest_db"], flat_x=f["flatness"] / max(fb["flatness"], 1e-9),
                        span_mel=float(diff[sw:].mean()), pre_mel=float(diff[:sw - 8].mean()),
                        switch_z=float((flux[sw - 2:sw + 3].max() - fluxb[sw - 2:sw + 3].max()) / sd),
                        info=r.info)
             rows.append(row)
             lines.append(f"| {song} | {row['cond']} | {row['d_energy']:+.2f} | {row['d_lufs']:+.2f} | "
                          f"{row['d_centroid']:+.0f} | {row['d_onset']:+.2f} | {row['d_perc']:+.3f} | "
+                         f"{row['d_crest']:+.2f} | {row['flat_x']:.2f} | "
                          f"{row['span_mel']:.2f} | {row['pre_mel']:.3f} | {row['switch_z']:+.2f} |")
     t = "\n".join(lines)
     print(t)
-    Path("tables/exp3_interrupt.md").write_text(t + "\n")
-    Path("tables/exp3_interrupt.json").write_text(json.dumps(rows, indent=1))
+    name = "exp3_interrupt" if ROOT.name == "exp3" else ROOT.name + "_interrupt"
+    Path(f"tables/{name}.md").write_text(t + "\n")
+    Path(f"tables/{name}.json").write_text(json.dumps(rows, indent=1))
 
 
 if __name__ == "__main__":

@@ -22,6 +22,14 @@ import numpy as np
 import meter
 
 ROOT = Path("runs/exp2c")
+# Per axis, the meter its positive pole should raise (sign -1: lower): the
+# "<axis> up" column counts the clips that moved that way.
+MEASURE = {
+    "energy": ("energy", 1),
+    "tempo": ("onset_rate", 1),          # fast: more onsets (bpm stays in the plan's Q:)
+    "density": ("crest_db", -1),         # full band: less dynamic range than sparse
+    "timbre": ("centroid_hz", 1),        # bright / aggressive: a higher centroid
+}
 PAT = re.compile(r"^(?P<g>[a-z]+)_(?P<seam>base|ar|nar|lat)(?P<layer>\d*)(?P<scale>[+-][\d.]+)?_s(?P<seed>\d+)$")
 
 
@@ -49,9 +57,14 @@ def latent_renders(axis, scales):
 
 
 def main():
+    global ROOT
     axis = sys.argv[1] if len(sys.argv) > 1 else "energy"
-    lat_scales = [float(x) for x in (sys.argv[2] if len(sys.argv) > 2 else "0.5,1,2,4").split(",")]
-    latent_renders(axis, lat_scales)
+    lat_scales = [float(x) for x in (sys.argv[2] if len(sys.argv) > 2 else "0.5,1,2,4").split(",") if x]
+    # Energy's runs are runs/exp2c; another axis's runs/exp2c_<axis> (make_jobs.py exp2c <axis>).
+    if axis != "energy":
+        ROOT = Path(f"runs/exp2c_{axis}")
+    if lat_scales:
+        latent_renders(axis, lat_scales)
     corpus = json.loads(Path("cache/features.json").read_text())
     ln = [f["lat_norm"] for f in corpus.values()]
     lat_lo, lat_hi = min(ln), max(ln)
@@ -64,6 +77,10 @@ def main():
         f = meter.features(r.audio)
         f["energy"] = meter.energy_score(f)
         f["lat_norm"] = float(np.linalg.norm(r.latents, axis=1).mean())
+        # The job's semantic cap reached: the song never ended (FINDINGS B2).
+        # (Energy's runs had the model's 9000; the other axes' jobs cap at 4000.)
+        frames = json.loads((d / "run.json").read_text()).get("frames", 0) if (d / "run.json").exists() else 0
+        f["capped"] = frames >= (9000 if axis == "energy" else 4000) - 1
         feats[d.name] = (m, f)
     rows = defaultdict(list)
     for name, (m, f) in feats.items():
@@ -74,21 +91,24 @@ def main():
             continue
         fb = b[1]
         broken = (f["flatness"] > 2 * fb["flatness"] + 0.01 or f["onset_rate"] < 0.5 * fb["onset_rate"]
-                  or f["lufs"] < -40 or not lat_lo * 0.8 <= f["lat_norm"] <= lat_hi * 1.2)
+                  or f["lufs"] < -40 or not lat_lo * 0.8 <= f["lat_norm"] <= lat_hi * 1.2 or f["capped"])
         rows[(m["seam"], m["layer"], float(m["scale"]))].append(dict(
             d_energy=f["energy"] - fb["energy"], d_lufs=f["lufs"] - fb["lufs"],
             d_centroid=f["centroid_hz"] - fb["centroid_hz"], d_onset=f["onset_rate"] - fb["onset_rate"],
             d_perc=f["perc_ratio"] - fb["perc_ratio"], flat_x=(f["flatness"] + 1e-4) / (fb["flatness"] + 1e-4),
-            lat_norm=f["lat_norm"], broken=broken))
-    keys = ["d_energy", "d_lufs", "d_centroid", "d_onset", "d_perc", "flat_x", "lat_norm"]
-    lines = ["| seam | layer | scale | n | " + " | ".join(keys) + " | broken | energy up |",
-             "|---|---|---|---|" + "---|" * len(keys) + "---|---|"]
+            d_tempo=f["tempo"] - fb["tempo"], d_crest=f["crest_db"] - fb["crest_db"],
+            lat_norm=f["lat_norm"], broken=broken, capped=f["capped"],
+            axis_up=(f[MEASURE[axis][0]] - fb[MEASURE[axis][0]]) * MEASURE[axis][1] > 0))
+    keys = ["d_energy", "d_lufs", "d_centroid", "d_onset", "d_perc", "d_tempo", "d_crest", "flat_x", "lat_norm"]
+    lines = [f"| seam | layer | scale | n | " + " | ".join(keys) +
+             f" | broken | capped | {axis} up ({'-' if MEASURE[axis][1] < 0 else ''}{MEASURE[axis][0]}) |",
+             "|---|---|---|---|" + "---|" * len(keys) + "---|---|---|"]
     for (seam, layer, scale), rs in sorted(rows.items()):
         mean = {k: float(np.mean([r[k] for r in rs])) for k in keys}
-        up = sum(r["d_energy"] > 0 for r in rs)
+        up = sum(r["axis_up"] for r in rs)
         lines.append(f"| {seam} | {layer or '-'} | {scale:+g} | {len(rs)} | " +
                      " | ".join(f"{mean[k]:+.2f}" if k != "d_centroid" else f"{mean[k]:+.0f}" for k in keys) +
-                     f" | {sum(r['broken'] for r in rs)} | {up}/{len(rs)} |")
+                     f" | {sum(r['broken'] for r in rs)} | {sum(r['capped'] for r in rs)} | {up}/{len(rs)} |")
     t = "\n".join(lines)
     print(t)
     Path("tables").mkdir(exist_ok=True)

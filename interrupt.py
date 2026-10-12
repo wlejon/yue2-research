@@ -71,7 +71,10 @@ def main():
     ap.add_argument("--right", type=int, default=25)
     ap.add_argument("--seed", type=int, default=5)
     ap.add_argument("--plan_only", action="store_true", help="only the C0 control and the plan-edit continuations")
+    ap.add_argument("--d_only", action="store_true", help="only the base and the D (AR steer) continuations")
+    ap.add_argument("--out", default=str(OUT), help="run directory (runs/exp3)")
     a = ap.parse_args()
+    out_dir = Path(a.out)
 
     lab = Lab()
     base = meter.load_run(f"runs/exp1/{a.song}_syn_W0")
@@ -89,7 +92,7 @@ def main():
     timings = {}
 
     def render(name, lat, codec_used=None, extra=None):
-        d = OUT / f"{a.song}_{name}"
+        d = out_dir / f"{a.song}_{name}"
         audio = lab.decode(lat)
         save_run(d, latents=lat.numpy(), audio=audio, semantic=codec_used,
                  info=dict(P=P, N=N, t0=a.t0, **(extra or {})))
@@ -110,6 +113,8 @@ def main():
     render("base", z0)
     if a.plan_only:
         a.lat_scales, a.nar, a.ar = "", "", ""
+    if a.d_only:
+        a.lat_scales, a.nar = "", ""
     # A: latent offset
     dl = torch.from_numpy(np.fromfile(f"cache/dirs/{a.axis}_latent_L0_e-1.f32", dtype=np.float32))
     ramp = torch.clamp(torch.arange(N, dtype=torch.float32) / 12, 0, 1)[:, None]
@@ -118,9 +123,10 @@ def main():
         z[P:P + N] += s * ramp * dl[None]
         render(f"A_lat{s:g}", z, extra=dict(cond="A", scale=s))
     # B: NAR re-render, then NAR steer
-    span, secs = nar_span(prefix, codec)
-    timings["B0"] = secs
-    render("B0", splice(span), extra=dict(cond="B0", seconds=secs))
+    if not a.d_only:
+        span, secs = nar_span(prefix, codec)
+        timings["B0"] = secs
+        render("B0", splice(span), extra=dict(cond="B0", seconds=secs))
     for spec in filter(None, a.nar.split(",")):
         L, s = spec.split(":")
         L, s = int(L), float(s)
@@ -128,7 +134,7 @@ def main():
         span, secs = nar_span(prefix, codec, steer=[dict(layer=L, delta=d, scale=s)])
         render(f"B_nar{L}_{s:g}", splice(span), extra=dict(cond="B", layer=L, scale=s, seconds=secs))
     # C: AR continuation, same prompt (re-roll) and the re-prompt
-    conts = [("C0", prefix), ("C_prompt", prefix_new)]
+    conts = [("C0", prefix)] if a.d_only else [("C0", prefix), ("C_prompt", prefix_new)]
     if a.plan_only:
         # C_plan_*: the same continuation under an edited plan in the prefix
         # (the codec so far teacher-forced): header tempo, or section labels.
@@ -167,7 +173,7 @@ def main():
         span, nsecs = nar_span(prefix, cod)
         render(f"D_ar{L}_{s:g}", splice(span), codec_used=cod,
                extra=dict(cond="D", layer=L, scale=s, ar_seconds=tm["seconds"], nar_seconds=nsecs))
-    (OUT / f"{a.song}_timings.json").write_text(json.dumps(timings))
+    (out_dir / f"{a.song}_timings.json").write_text(json.dumps(timings))
 
 
 if __name__ == "__main__":

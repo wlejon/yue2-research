@@ -120,34 +120,46 @@ def _nar_avg(axis, layer):
     return f"cache/dirs/{axis}_nar_L{layer}_avg.f32"
 
 
-def exp2c(axis="energy", ar_layers="9,15,21", nar_layers="9,15,21", ar_scales="1,2,3", nar_scales="2,4,8,16"):
+def exp2c(axis="energy", ar_layers="9,15,21", nar_layers="9,15,21", ar_scales="1,2,3", nar_scales="2,4,8,16",
+          max_tokens="0"):
     """Steering verification on held-out prompts: base renders, then the
     semantic stage steered (plan fixed: plan=false) and the NAR steered on the
-    base's own tokens (synthesize mode), at increasing scale, in both signs."""
+    base's own tokens (synthesize mode), at increasing scale, in both signs.
+
+    Energy writes runs/exp2c (jobs/exp2c.json); any other axis runs/exp2c_<axis>
+    (jobs/exp2c_<axis>.json), with its own base renders (the same seeds). An
+    empty layer list skips that seam. max_tokens > 0 caps the semantic stage
+    (a steer that never ends the song hits the cap: steer_eval counts it broken).
+
+        make_jobs.py exp2c density 21,24 "" 1,2,3 "" 4000
+    """
     from prompts import HELDOUT, LYRICS
-    ar_layers = [int(x) for x in ar_layers.split(",")]
-    nar_layers = [int(x) for x in nar_layers.split(",")]
-    ar_scales = [float(x) for x in ar_scales.split(",")]
-    nar_scales = [float(x) for x in nar_scales.split(",")]
+    ints = lambda s: [int(x) for x in s.split(",") if x]
+    floats = lambda s: [float(x) for x in s.split(",") if x]
+    ar_layers, nar_layers = ints(ar_layers), ints(nar_layers)
+    ar_scales, nar_scales = floats(ar_scales), floats(nar_scales)
+    out = "runs/exp2c" if axis == "energy" else f"runs/exp2c_{axis}"
+    cap = dict(semanticSampling=dict(maxTokens=int(max_tokens))) if int(max_tokens) > 0 else {}
     base, steer = [], []
     for g, style in HELDOUT.items():
         for seed in (21, 22):
             b = f"{g}_base_s{seed}"
-            base.append(dict(name=b, style=style, lyrics=LYRICS["corpus"], cot="full", seed=seed))
+            base.append(dict(name=b, style=style, lyrics=LYRICS["corpus"], cot="full", seed=seed, **cap))
             for sign in (1, -1):
                 for s in sorted(set(ar_scales) | set(nar_scales)):
                     sc = sign * s
                     tag = f"{'+' if sign > 0 else '-'}{s:g}"
                     for L in (ar_layers if s in ar_scales else []):
                         steer.append(dict(name=f"{g}_ar{L}{tag}_s{seed}", style=style, lyrics=LYRICS["corpus"],
-                                          cot="full", seed=seed,
+                                          cot="full", seed=seed, **cap,
                                           steer=[dict(layer=L, nar=False, plan=False, semantic=True, scale=sc,
                                                       delta=f"cache/dirs/{axis}_semantic_L{L}_e-1.f32")]))
                     for L in (nar_layers if s in nar_scales else []):
                         steer.append(dict(name=f"{g}_nar{L}{tag}_s{seed}", mode="synthesize",
-                                          **{"from": f"runs/exp2c/{b}"},
+                                          **{"from": f"{out}/{b}"},
                                           steer=[dict(layer=L, nar=True, scale=sc, delta=_nar_avg(axis, L))]))
-    write("exp2c", dict(out="runs/exp2c", arWeights="int8", vae=True, runs=base + steer))
+    write("exp2c" if axis == "energy" else f"exp2c_{axis}",
+          dict(out=out, arWeights="int8", vae=True, runs=base + steer))
 
 
 if __name__ == "__main__":
