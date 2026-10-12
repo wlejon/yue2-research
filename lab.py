@@ -155,16 +155,25 @@ class Lab:
         return state.float().cpu()
 
     def window(self, prefix, codec_all, noise_all, a, b, left=0, right=0, known_left=None, steps=32,
-               ctx_codec=True, steer=None):
+               ctx_codec=True, steer=None, history=False, abs_pos=False, future=False):
         """Latents for core frames [a, b) of a song.
 
         The solve covers frames [a-left, b+right) with the song's own noise;
         with ctx_codec the AR prefix carries codec[a-left, b+right) (else only
         codec[a, b)). known_left: the already-emitted latents of frames
         [a-left, a), clamped (inpainting) when given.
+        history: the AR prefix carries every codec token from the song's start
+        (codec[0, b+right)), as the semantic stage's own KV cache holds them.
+        future: the AR prefix carries the whole song's codec (upper bound).
+        abs_pos: latent position embeddings continue from the solve's first
+        frame instead of restarting at 0.
         """
         lo, hi = max(0, a - left), min(len(codec_all), b + right)
         codec = codec_all[lo:hi] if ctx_codec else codec_all[a:b]
+        if history:
+            codec = codec_all[:hi]
+        if future:
+            codec = codec_all
         noise = noise_all[lo:hi]
         known = mask = None
         if known_left is not None and a > lo:
@@ -174,18 +183,19 @@ class Lab:
             mask[: a - lo] = True
         if steer:
             steer = [dict(s, frames=None if s.get("frames") is None else s["frames"][lo:hi]) for s in steer]
-        lat = self.nar(prefix, codec, noise, steps=steps, known=known, known_mask=mask, steer=steer)
+        lat = self.nar(prefix, codec, noise, steps=steps, known=known, known_mask=mask, steer=steer,
+                       pos_offset=lo if abs_pos else 0)
         return lat[a - lo: b - lo]
 
     def stream(self, prefix, codec_all, noise_all, W, left=0, right=0, inpaint=False, steps=32, frames=None,
-               ctx_codec=True, steer=None):
+               ctx_codec=True, steer=None, history=False, abs_pos=False, future=False):
         T = frames or len(codec_all)
         out = []
         for a in range(0, T, W):
             b = min(T, a + W)
             prev = torch.cat(out) if out else None
-            out.append(self.window(prefix, codec_all[:T], noise_all[:T], a, b, left, right,
-                                   prev if inpaint else None, steps, ctx_codec, steer))
+            out.append(self.window(prefix, codec_all if future else codec_all[:T], noise_all, a, b, left, right,
+                                   prev if inpaint else None, steps, ctx_codec, steer, history, abs_pos, future))
         return torch.cat(out)
 
     # ── VAE ─────────────────────────────────────────────────────────────────

@@ -62,6 +62,11 @@ def analyse(ref, var, lm_ref=None, flux_ref=None):
         sd = np.std(fr)
         mel_d = np.abs(lm[:, :n] - lm_ref[:, :n]).mean(0)
         out["mel_l1"] = float(mel_d.mean())
+        fr_, fv_ = meter.features(ref.audio[:, :var.audio.shape[1]]), meter.features(var.audio)
+        out["d_lufs"] = fv_["lufs"] - fr_["lufs"]
+        out["centroid_x"] = fv_["centroid_hz"] / fr_["centroid_hz"]
+        out["onset_x"] = fv_["onset_rate"] / fr_["onset_rate"]
+        out["d_vocal"] = fv_["vocal_band"] - fr_["vocal_band"]
         if len(seams):
             cols = np.clip(seams * COLS, 1, n - 2)
             win = np.stack([cols - 1, cols, cols + 1])
@@ -106,8 +111,8 @@ def main():
             r.update(song=song, var=var)
             rows.append(r)
             print(json.dumps(r))
-    keys = ["song", "var", "frames", "n_seams", "lat_cos", "lat_rel", "rel_at_seam", "rel_mid", "seam_jump",
-            "seam_jump_ref", "mel_l1", "mel_l1_seam", "mel_l1_mid", "seam_flux_z", "seam_flux_p95", "seam_flux_ref_pctl"]
+    keys = ["song", "var", "n_seams", "lat_cos", "seam_jump", "seam_jump_ref", "mel_l1", "mel_l1_seam", "mel_l1_mid",
+            "seam_flux_z", "seam_flux_p95", "seam_flux_ref_pctl", "d_lufs", "centroid_x", "onset_x", "d_vocal"]
     lines = ["| " + " | ".join(keys) + " |", "|" + "---|" * len(keys)]
     for r in rows:
         lines.append("| " + " | ".join(
