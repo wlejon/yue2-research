@@ -47,7 +47,48 @@ def exp1d():
             dict(name=f"nar{tag}", mode="synthesize", **{"from": "runs/exp1/folk_gen_W0"}, narChunkFrames=500)]))
 
 
-CAPTURE_LAYERS =[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+def vram():
+    """One process per scenario (native/vram.js), so the caching allocator of
+    one cannot hide the next."""
+    s = SONGS["folk"]
+    song = dict(style=s["style"], lyrics=s["lyrics"])
+    scen = {
+        "base": dict(),
+        "vae": dict(vae=True),
+        "bf16": dict(yue="bf16"),
+        "int8": dict(yue="int8"),
+        "int8_vae": dict(yue="int8", vae=True),
+        "gen_default": dict(yue="int8", vae=True, generate=dict()),
+        "gen_bf16": dict(yue="bf16", vae=True, generate=dict()),
+        "gen_max4500": dict(yue="int8", vae=True, generate=dict(semanticSampling=dict(maxTokens=4500))),
+        "gen_cfg": dict(yue="int8", vae=True, generate=dict(cfgScale=1.5)),
+        "gen_W500": dict(yue="int8", vae=True, generate=dict(narChunkFrames=500)),
+        "gen_novae": dict(yue="int8", generate=dict()),
+    }
+    for name, sc in scen.items():
+        write(f"vram_{name}", dict(scenario=name, out=f"tables/vram/{name}.json", song=song, runs=[], **sc))
+
+
+def exp4c():
+    """Mid-plan edits followed by the semantic stage (native, abc supplied, the
+    same seed): a tempo change, a key change, and a section label naming the
+    energy, each from the folk plan's '% bridge' on."""
+    s = SONGS["folk"]
+    abc = json.loads((ROOT / "runs/exp1/folk_gen_W0/plan.json").read_text(encoding="utf-8"))["abc"]
+    i = abc.index("% bridge")
+    tail = abc[i:]
+    edits = {
+        "tempo140": abc[:i] + "Q:1/4=140\n" + tail,
+        "keyEm": abc[:i] + "K:Em\n" + tail,
+        "label": abc[:i] + tail.replace("% chorus", "% chorus, energetic, powerful, full band"),
+        "orig": abc,
+    }
+    runs = [dict(name=f"folk_{k}", style=s["style"], lyrics=s["lyrics"], cot="full", seed=1001, abc=v)
+            for k, v in edits.items()]
+    write("exp4c", dict(out="runs/exp4c", arWeights="int8", vae=True, runs=runs))
+
+
+CAPTURE_LAYERS = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
 NAR_EVALS = [0, 21, 42, 63]
 
 
@@ -79,29 +120,30 @@ def _nar_avg(axis, layer):
     return f"cache/dirs/{axis}_nar_L{layer}_avg.f32"
 
 
-def exp2c(axis="energy", ar_layers="9,15,21", nar_layers="9,15,21", scales="1,2,4,8"):
+def exp2c(axis="energy", ar_layers="9,15,21", nar_layers="9,15,21", ar_scales="1,2,3", nar_scales="2,4,8,16"):
     """Steering verification on held-out prompts: base renders, then the
     semantic stage steered (plan fixed: plan=false) and the NAR steered on the
     base's own tokens (synthesize mode), at increasing scale, in both signs."""
     from prompts import HELDOUT, LYRICS
     ar_layers = [int(x) for x in ar_layers.split(",")]
     nar_layers = [int(x) for x in nar_layers.split(",")]
-    scales = [float(x) for x in scales.split(",")]
+    ar_scales = [float(x) for x in ar_scales.split(",")]
+    nar_scales = [float(x) for x in nar_scales.split(",")]
     base, steer = [], []
     for g, style in HELDOUT.items():
         for seed in (21, 22):
             b = f"{g}_base_s{seed}"
             base.append(dict(name=b, style=style, lyrics=LYRICS["corpus"], cot="full", seed=seed))
             for sign in (1, -1):
-                for s in scales:
+                for s in sorted(set(ar_scales) | set(nar_scales)):
                     sc = sign * s
                     tag = f"{'+' if sign > 0 else '-'}{s:g}"
-                    for L in ar_layers:
+                    for L in (ar_layers if s in ar_scales else []):
                         steer.append(dict(name=f"{g}_ar{L}{tag}_s{seed}", style=style, lyrics=LYRICS["corpus"],
                                           cot="full", seed=seed,
                                           steer=[dict(layer=L, nar=False, plan=False, semantic=True, scale=sc,
                                                       delta=f"cache/dirs/{axis}_semantic_L{L}_e-1.f32")]))
-                    for L in nar_layers:
+                    for L in (nar_layers if s in nar_scales else []):
                         steer.append(dict(name=f"{g}_nar{L}{tag}_s{seed}", mode="synthesize",
                                           **{"from": f"runs/exp2c/{b}"},
                                           steer=[dict(layer=L, nar=True, scale=sc, delta=_nar_avg(axis, L))]))

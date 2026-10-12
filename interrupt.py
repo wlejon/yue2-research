@@ -6,8 +6,9 @@ Base: a native exp1 run (whole-song protocol latents of its own tokens).
 Switch frame P = 25*T0; the changed span is [P, P+N).
 
   A_lat<s>     latent offset: z[P:P+N] += s * d_latent (12-frame ramp in)
-  B0           NAR re-synthesis of [P, P+N) with 50 frames of inpainted left
-               context and no steer (the re-render control)
+  B0           NAR re-synthesis of [P, P+N) with --left frames (250) of inpainted
+               left context and --right (25) lookahead tokens, no steer (the
+               re-render control: Exp 1c says a 250-frame core needs this much)
   B_nar<L>_<s> the same with the NAR energy direction at layer L, scale s
   C0           AR continuation of N tokens from codec[:P] under the same prompt
                (a re-roll control), then B0-style NAR
@@ -65,7 +66,8 @@ def main():
     ap.add_argument("--lat_scales", default="1,2,4")
     ap.add_argument("--nar", default="15:2,15:4")
     ap.add_argument("--ar", default="15:2,15:4")
-    ap.add_argument("--left", type=int, default=50)
+    ap.add_argument("--left", type=int, default=250)
+    ap.add_argument("--right", type=int, default=25)
     ap.add_argument("--seed", type=int, default=5)
     a = ap.parse_args()
 
@@ -94,7 +96,7 @@ def main():
     def nar_span(pref, cod, steer=None):
         torch.cuda.synchronize()
         t = time.perf_counter()
-        lat = lab.window(pref, cod, noise, P, P + N, left=a.left, right=0, known_left=z0[:P], steer=steer)
+        lat = lab.window(pref, cod, noise, P, P + N, left=a.left, right=a.right, known_left=z0[:P], steer=steer)
         torch.cuda.synchronize()
         return lat, time.perf_counter() - t
 
@@ -125,9 +127,9 @@ def main():
     for name, pref in (("C0", prefix), ("C_prompt", prefix_new)):
         torch.cuda.synchronize()
         t = time.perf_counter()
-        cont, tm = lab.continue_semantic(pref, codec[:P], N, seed=a.seed)
-        cod = codec[:P] + cont + codec[P + N:]
-        span, nsecs = nar_span(pref, cod[:P + N] + codec[P + N:])
+        cont, tm = lab.continue_semantic(pref, codec[:P], N + a.right, seed=a.seed)
+        cod = codec[:P] + cont + codec[P + len(cont):]
+        span, nsecs = nar_span(pref, cod)
         render(name, splice(span), codec_used=cod,
                extra=dict(cond=name, ar_seconds=tm["seconds"], prefill_seconds=tm["prefill_seconds"],
                           nar_seconds=nsecs, tokens=len(cont)))
@@ -140,7 +142,7 @@ def main():
             from yue2.sampling import generate_tokens
             from yue2.protocol import Sampling, CODEC_OFFSET
             full = list(prefix) + [c + CODEC_OFFSET for c in codec[:P]]
-            ids, tm, _ = generate_tokens(lab.model, full, Sampling(min_tokens=0, max_tokens=N), a.seed, "semantic",
+            ids, tm, _ = generate_tokens(lab.model, full, Sampling(min_tokens=0, max_tokens=N + a.right), a.seed, "semantic",
                                          use_cuda_graph=False)
         finally:
             h.remove()

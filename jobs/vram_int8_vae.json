@@ -1,0 +1,11 @@
+{
+ "scenario": "int8_vae",
+ "out": "tables/vram/int8_vae.json",
+ "song": {
+  "style": "indie folk, warm acoustic guitar, female vocal, 92 bpm",
+  "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n"
+ },
+ "runs": [],
+ "yue": "int8",
+ "vae": true
+}
