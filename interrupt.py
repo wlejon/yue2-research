@@ -24,6 +24,7 @@ are the base's) and decoded; meters compare [P, P+N) and the switch.
 """
 import argparse
 import json
+import re
 import time
 from pathlib import Path
 
@@ -69,6 +70,7 @@ def main():
     ap.add_argument("--left", type=int, default=250)
     ap.add_argument("--right", type=int, default=25)
     ap.add_argument("--seed", type=int, default=5)
+    ap.add_argument("--plan_only", action="store_true", help="only the C0 control and the plan-edit continuations")
     a = ap.parse_args()
 
     lab = Lab()
@@ -106,10 +108,12 @@ def main():
         return z
 
     render("base", z0)
+    if a.plan_only:
+        a.lat_scales, a.nar, a.ar = "", "", ""
     # A: latent offset
     dl = torch.from_numpy(np.fromfile(f"cache/dirs/{a.axis}_latent_L0_e-1.f32", dtype=np.float32))
     ramp = torch.clamp(torch.arange(N, dtype=torch.float32) / 12, 0, 1)[:, None]
-    for s in [float(x) for x in a.lat_scales.split(",")]:
+    for s in [float(x) for x in a.lat_scales.split(",") if x]:
         z = z0.clone()
         z[P:P + N] += s * ramp * dl[None]
         render(f"A_lat{s:g}", z, extra=dict(cond="A", scale=s))
@@ -117,14 +121,26 @@ def main():
     span, secs = nar_span(prefix, codec)
     timings["B0"] = secs
     render("B0", splice(span), extra=dict(cond="B0", seconds=secs))
-    for spec in a.nar.split(","):
+    for spec in filter(None, a.nar.split(",")):
         L, s = spec.split(":")
         L, s = int(L), float(s)
         d = torch.stack([load_dir(a.axis, "synthesize", L, e) for e in (0, 21, 42, 63)]).mean(0)
         span, secs = nar_span(prefix, codec, steer=[dict(layer=L, delta=d, scale=s)])
         render(f"B_nar{L}_{s:g}", splice(span), extra=dict(cond="B", layer=L, scale=s, seconds=secs))
     # C: AR continuation, same prompt (re-roll) and the re-prompt
-    for name, pref in (("C0", prefix), ("C_prompt", prefix_new)):
+    conts = [("C0", prefix), ("C_prompt", prefix_new)]
+    if a.plan_only:
+        # C_plan_*: the same continuation under an edited plan in the prefix
+        # (the codec so far teacher-forced): header tempo, or section labels.
+        abc = plan["abc"]
+        ids0 = lab.tok.encode(abc)
+        print("abc re-encode matches abcIds:", ids0 == list(plan["abcIds"]), flush=True)
+        q = re.search(r"^Q:.*$", abc, re.M)
+        edits = {"C_plan_tempo140": abc[:q.start()] + "Q:1/4=140" + abc[q.end():],
+                 "C_plan_label": re.sub(r"^% ([a-z\-]+)", r"% \1, energetic, powerful, full band", abc, flags=re.M)}
+        conts = [("C0", prefix)] + [(k, lab.prefix(plan["style"], plan["lyrics"], plan["cot"], lab.tok.encode(v)))
+                                    for k, v in edits.items()]
+    for name, pref in conts:
         torch.cuda.synchronize()
         t = time.perf_counter()
         cont, tm = lab.continue_semantic(pref, codec[:P], N + a.right, seed=a.seed)
@@ -134,7 +150,7 @@ def main():
                extra=dict(cond=name, ar_seconds=tm["seconds"], prefill_seconds=tm["prefill_seconds"],
                           nar_seconds=nsecs, tokens=len(cont)))
     # D: AR steer on the continuation
-    for spec in a.ar.split(","):
+    for spec in filter(None, a.ar.split(",")):
         L, s = spec.split(":")
         L, s = int(L), float(s)
         h = ar_steer_hooks(lab, L, load_dir(a.axis, "semantic", L), s)

@@ -1,0 +1,456 @@
+{
+ "folk_s1": {
+  "full": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus"
+   ],
+   "bars": [
+    13,
+    24,
+    20,
+    16,
+    32,
+    10,
+    21
+   ],
+   "header": {
+    "M": "2/4",
+    "L": "1/32",
+    "Q": "1/4=92",
+    "K": "Dm"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "pre-chorus",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "truncated": false,
+   "seconds": 15.898235700005898
+  },
+  "partial": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus"
+   ],
+   "bars": [
+    5,
+    25,
+    20
+   ],
+   "header": {
+    "M": "2/4",
+    "L": "1/32",
+    "Q": "1/4=92",
+    "K": "Dm"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "pre-chorus",
+    "chorus"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.8,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 6.6755199000181165
+  },
+  "extended": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "bars": [
+    5,
+    25,
+    20,
+    17,
+    19,
+    10,
+    19,
+    20
+   ],
+   "header": {
+    "M": "2/4",
+    "L": "1/32",
+    "Q": "1/4=92",
+    "K": "Dm"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "pre-chorus",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.8,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 8.657955299975583
+  }
+ },
+ "folk_s2": {
+  "full": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "interlude",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "bars": [
+    5,
+    24,
+    16,
+    8,
+    16,
+    16,
+    24,
+    16,
+    17
+   ],
+   "header": {
+    "M": "2/4",
+    "L": "1/32",
+    "Q": "1/4=90",
+    "K": "Dm"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "pre-chorus",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "truncated": false,
+   "seconds": 15.974497699993663
+  },
+  "partial": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus"
+   ],
+   "bars": [
+    5,
+    24,
+    20
+   ],
+   "header": {
+    "M": "2/4",
+    "L": "1/32",
+    "Q": "1/4=90",
+    "K": "Dm"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "pre-chorus",
+    "chorus"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.8333333333333334,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 6.631453699985286
+  },
+  "extended": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "bars": [
+    5,
+    24,
+    20,
+    16,
+    20,
+    16,
+    20,
+    10
+   ],
+   "header": {
+    "M": "2/4",
+    "L": "1/32",
+    "Q": "1/4=90",
+    "K": "Dm"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "pre-chorus",
+    "chorus",
+    "verse",
+    "chorus",
+    "bridge",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.8333333333333334,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 9.519579599989811
+  }
+ },
+ "synthpop_s1": {
+  "full": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "outro"
+   ],
+   "bars": [
+    12,
+    16,
+    16,
+    16,
+    16,
+    10
+   ],
+   "header": {
+    "M": "4/4",
+    "L": "1/16",
+    "Q": "1/4=115",
+    "K": "D#m"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": true,
+   "truncated": false,
+   "seconds": 12.37792569998419
+  },
+  "partial": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "interlude"
+   ],
+   "bars": [
+    12,
+    16,
+    16,
+    18,
+    18
+   ],
+   "header": {
+    "M": "4/4",
+    "L": "1/16",
+    "Q": "1/4=115",
+    "K": "D#m"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.75,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 11.393853999994462
+  },
+  "extended": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "interlude",
+    "chorus",
+    "outro"
+   ],
+   "bars": [
+    12,
+    16,
+    16,
+    18,
+    8,
+    16,
+    8
+   ],
+   "header": {
+    "M": "4/4",
+    "L": "1/16",
+    "Q": "1/4=115",
+    "K": "D#m"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.75,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 4.751087300013751
+  }
+ },
+ "synthpop_s2": {
+  "full": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "interlude"
+   ],
+   "bars": [
+    7,
+    16,
+    16,
+    16,
+    16,
+    18
+   ],
+   "header": {
+    "M": "4/4",
+    "L": "1/32",
+    "Q": "1/4=117",
+    "K": "Em"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "truncated": false,
+   "seconds": 15.073654000007082
+  },
+  "partial": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "interlude",
+    "verse",
+    "chorus"
+   ],
+   "bars": [
+    7,
+    16,
+    10,
+    8,
+    16,
+    16
+   ],
+   "header": {
+    "M": "4/4",
+    "L": "1/32",
+    "Q": "1/4=117",
+    "K": "Em"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.5714285714285714,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 13.08030250002048
+  },
+  "extended": {
+   "sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "interlude",
+    "verse",
+    "chorus",
+    "interlude"
+   ],
+   "bars": [
+    7,
+    16,
+    10,
+    8,
+    16,
+    12,
+    16
+   ],
+   "header": {
+    "M": "4/4",
+    "L": "1/32",
+    "Q": "1/4=117",
+    "K": "Em"
+   },
+   "lyric_sections": [
+    "intro",
+    "verse",
+    "chorus",
+    "verse",
+    "chorus",
+    "outro"
+   ],
+   "sections_match": false,
+   "chord_jaccard_vs_full": 0.8,
+   "header_same_as_full": true,
+   "truncated": false,
+   "seconds": 7.896871400007512
+  }
+ }
+}
