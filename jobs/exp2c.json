@@ -1,0 +1,1475 @@
+{
+ "out": "runs/exp2c",
+ "arWeights": "int8",
+ "vae": true,
+ "runs": [
+  {
+   "name": "soul_base_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21
+  },
+  {
+   "name": "soul_base_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22
+  },
+  {
+   "name": "country_base_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21
+  },
+  {
+   "name": "country_base_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22
+  },
+  {
+   "name": "soul_ar9+2_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21+2_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9+2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21+2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9+4_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21+4_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9+4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21+4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9+8_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21+8_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9+8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21+8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9-2_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21-2_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9-2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21-2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9-4_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21-4_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9-4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21-4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9-8_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21-8_s21",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9-8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21-8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9+2_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21+2_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9+2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21+2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9+4_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21+4_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9+4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21+4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9+8_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21+8_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9+8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21+8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9-2_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21-2_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9-2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21-2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9-4_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21-4_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9-4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21-4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar9-8_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_ar21-8_s22",
+   "style": "soul, female vocal, Rhodes piano, bass",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar9-8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "soul_nar21-8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/soul_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9+2_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21+2_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9+2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21+2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9+4_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21+4_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9+4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21+4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9+8_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21+8_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9+8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21+8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9-2_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21-2_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9-2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21-2_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9-4_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21-4_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9-4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21-4_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9-8_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21-8_s21",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 21,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9-8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21-8_s21",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s21",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9+2_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21+2_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9+2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21+2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9+4_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21+4_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9+4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21+4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9+8_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21+8_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9+8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21+8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": 8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9-2_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21-2_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9-2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21-2_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -2.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9-4_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21-4_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9-4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21-4_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -4.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar9-8_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 9,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L9_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_ar21-8_s22",
+   "style": "country, male vocal, acoustic guitar, fiddle",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 22,
+   "steer": [
+    {
+     "layer": 21,
+     "nar": false,
+     "plan": false,
+     "semantic": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_semantic_L21_e-1.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar9-8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 9,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L9_avg.f32"
+    }
+   ]
+  },
+  {
+   "name": "country_nar21-8_s22",
+   "mode": "synthesize",
+   "from": "runs/exp2c/country_base_s22",
+   "steer": [
+    {
+     "layer": 21,
+     "nar": true,
+     "scale": -8.0,
+     "delta": "cache/dirs/energy_nar_L21_avg.f32"
+    }
+   ]
+  }
+ ]
+}

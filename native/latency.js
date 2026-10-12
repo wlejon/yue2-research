@@ -71,7 +71,7 @@ for (const k of [1, 2, 3, 4]) {
     const ts = [];
     for (let i = 0; i < 3; i++) {
         const r = run((done) => yue.semantic(pl, Object.assign({}, o, { onDone: done })), 'semantic');
-        ts.push(r.res.timing.semanticTtft);
+        ts.push(r.secs);   // semantic() reports no timing: wall of prefill + 2 tokens (+ a few ms of event pumping)
     }
     out.prefill.push({ prefix: pl.prefix.length, ttft: med(ts) });
     console.log('semantic TTFT at prefix ' + pl.prefix.length + ': ' + med(ts).toFixed(3) + ' s');

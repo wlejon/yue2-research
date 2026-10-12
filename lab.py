@@ -81,6 +81,29 @@ class Lab:
         return cache
 
     @torch.inference_mode()
+    def song_cache(self, prefix, codec):
+        """AR K/V of prompt + the whole song's codec (no MUSIC_END). Causal, so
+        rows [0, n) are exactly a prefill of the first n tokens."""
+        return self._prefill(list(prefix) + [int(c) + CODEC_OFFSET for c in codec])
+
+    @torch.inference_mode()
+    def history_cache(self, song_cache, n):
+        """The NAR's AR cache for prompt+codec rows [0, n) + MUSIC_END at
+        position n, from a song cache: one single-token AR forward."""
+        backbone = self.model.model
+        x = backbone.embed_tokens(torch.tensor([[MUSIC_END]], device=self.device))
+        cos, sin = backbone.rotary_emb(torch.tensor([[n]], device=self.device))
+        out = []
+        for layer, (k, v) in zip(backbone.layers, song_cache):
+            q, k1, v1 = layer.self_attn.project_qkv(layer.input_layernorm(x), cos, sin)
+            K, V = torch.cat((k[:n], k1[0])), torch.cat((v[:n], v1[0]))
+            out.append((K, V))
+            h = attention(q[0], K, V)
+            x = x + layer.self_attn.o_proj(h.flatten(1)[None])
+            x = x + layer.mlp(layer.post_attention_layernorm(x))
+        return out
+
+    @torch.inference_mode()
     def nar(self, prefix, codec, noise, steps=32, known=None, known_mask=None, steer=None, capture=None,
             pos_offset=0, cache=None):
         """Flow-match latents for len(noise) frames conditioned on
@@ -155,7 +178,7 @@ class Lab:
         return state.float().cpu()
 
     def window(self, prefix, codec_all, noise_all, a, b, left=0, right=0, known_left=None, steps=32,
-               ctx_codec=True, steer=None, history=False, abs_pos=False, future=False):
+               ctx_codec=True, steer=None, history=False, abs_pos=False, future=False, scache=None):
         """Latents for core frames [a, b) of a song.
 
         The solve covers frames [a-left, b+right) with the song's own noise;
@@ -183,19 +206,30 @@ class Lab:
             mask[: a - lo] = True
         if steer:
             steer = [dict(s, frames=None if s.get("frames") is None else s["frames"][lo:hi]) for s in steer]
+        cache = None
+        if scache is not None and (history or future):
+            cache = self.history_cache(scache, len(prefix) + len(codec))
         lat = self.nar(prefix, codec, noise, steps=steps, known=known, known_mask=mask, steer=steer,
-                       pos_offset=lo if abs_pos else 0)
+                       pos_offset=lo if abs_pos else 0, cache=cache)
         return lat[a - lo: b - lo]
 
     def stream(self, prefix, codec_all, noise_all, W, left=0, right=0, inpaint=False, steps=32, frames=None,
                ctx_codec=True, steer=None, history=False, abs_pos=False, future=False):
         T = frames or len(codec_all)
+        scache = self.song_cache(prefix, codec_all) if (history or future) else None
         out = []
-        for a in range(0, T, W):
-            b = min(T, a + W)
+        # W: one size, or a list of sizes (the last repeats): growing windows
+        sizes = list(W) if isinstance(W, (list, tuple)) else [W]
+        bounds, a, i = [], 0, 0
+        while a < T:
+            bounds.append((a, min(T, a + sizes[min(i, len(sizes) - 1)])))
+            a, i = bounds[-1][1], i + 1
+        for a, b in bounds:
             prev = torch.cat(out) if out else None
-            out.append(self.window(prefix, codec_all if future else codec_all[:T], noise_all, a, b, left, right,
-                                   prev if inpaint else None, steps, ctx_codec, steer, history, abs_pos, future))
+            # history: codec_all is passed whole so right context past T exists; window() cuts it at b+right
+            out.append(self.window(prefix, codec_all, noise_all, a, b, left, right,
+                                   prev if inpaint else None, steps, ctx_codec, steer, history, abs_pos, future,
+                                   scache))
         return torch.cat(out)
 
     # ── VAE ─────────────────────────────────────────────────────────────────

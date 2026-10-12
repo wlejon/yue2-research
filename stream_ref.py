@@ -44,11 +44,36 @@ SETS = {
         dict(w=100, l=25, r=25, ip=1, hist=1, abs=1), dict(w=250, l=25, r=25, ip=1, hist=1, abs=1),
         dict(w=250, hist=1, abs=1), dict(w=250, l=25, ip=1, hist=1),
     ],
+    # how long a span does the NAR need: long windows, and short new cores
+    # with a long inpainted left context
+    "long": [
+        dict(w=250), dict(w=500), dict(w=750), dict(w=250, l=25, r=25, ip=1), dict(w=500, l=25, r=25, ip=1),
+        dict(w=50, l=250, ip=1), dict(w=50, l=250, r=25, ip=1), dict(w=100, l=400, r=25, ip=1),
+        dict(w=250, l=250, r=25, ip=1), dict(w=250, l=250, r=25, ip=1, hist=1, abs=1),
+    ],
+    # the proposed stream: a first window for time to first audio, then long ones
+    "design": [
+        dict(w=[250, 500], l=25, r=25, ip=1), dict(w=[100, 250, 500], l=25, r=25, ip=1),
+        dict(w=[250, 375], l=25, r=25, ip=1), dict(w=[125, 375], l=25, r=25, ip=1),
+        dict(w=375, l=25, r=25, ip=1),
+    ],
 }
 
 
+def bounds(w, T):
+    sizes = w if isinstance(w, list) else [w]
+    out, a, i = [], 0, 0
+    while a < T:
+        a += sizes[min(i, len(sizes) - 1)]
+        i += 1
+        if a < T:
+            out.append(a)
+    return out
+
+
 def name(v):
-    s = f"W{v['w']}_L{v.get('l', 0)}_R{v.get('r', 0)}"
+    w = "-".join(map(str, v["w"])) if isinstance(v["w"], list) else v["w"]
+    s = f"W{w}_L{v.get('l', 0)}_R{v.get('r', 0)}"
     for k, tag in (("ip", "_ip"), ("nc", "_nc"), ("hist", "_hist"), ("abs", "_abs"), ("fut", "_fut")):
         if v.get(k):
             s += tag
@@ -81,7 +106,7 @@ def main(set_name, songs):
                 lat = lab.stream(prefix, codec, noise, v["w"], v.get("l", 0), v.get("r", 0), bool(v.get("ip")),
                                  frames=FRAMES, ctx_codec=not v.get("nc"), history=bool(v.get("hist")),
                                  abs_pos=bool(v.get("abs")), future=bool(v.get("fut")))
-                seams = list(range(v["w"], FRAMES, v["w"]))
+                seams = bounds(v["w"], FRAMES)
             torch.cuda.synchronize()
             secs = time.perf_counter() - t
             audio = lab.decode(lat)

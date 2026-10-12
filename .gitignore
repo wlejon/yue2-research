@@ -4,6 +4,8 @@ __pycache__/
 cache/
 runs/
 corpus/
+# bro-headless snapshot (bro 87b92fb1, brosoundml ea4146a; built 2026-10-11 22:52)
+bin/
 *.wav
 *.flac
 *.mp3

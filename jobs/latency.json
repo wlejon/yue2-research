@@ -1,0 +1,1 @@
+{ "from": "runs/exp1/folk_gen_W0", "out": "tables/latency_native.json", "arWeights": "int8" }
