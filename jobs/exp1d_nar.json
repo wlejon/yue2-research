@@ -1,0 +1,13 @@
+{
+ "out": "runs/exp1d",
+ "arWeights": "int8",
+ "vae": false,
+ "runs": [
+  {
+   "name": "nar",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 500
+  }
+ ]
+}

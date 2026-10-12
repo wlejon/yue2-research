@@ -36,7 +36,18 @@ def exp1():
     write("exp1_syn", dict(out="runs/exp1", arWeights="int8", vae=True, runs=syn))
 
 
-CAPTURE_LAYERS = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+def exp1d():
+    """Two processes on one GPU: semantic sampling alone, NAR (500-frame
+    windows) alone, then both at once (suffix _conc)."""
+    s = SONGS["folk"]
+    for tag in ("", "_conc"):
+        write(f"exp1d_sem{tag}", dict(out="runs/exp1d", arWeights="int8", vae=False, runs=[
+            dict(name=f"sem{tag}", style=s["style"], lyrics=s["lyrics"], cot="full", seed=1001, runSynthesize=False)]))
+        write(f"exp1d_nar{tag}", dict(out="runs/exp1d", arWeights="int8", vae=False, runs=[
+            dict(name=f"nar{tag}", mode="synthesize", **{"from": "runs/exp1/folk_gen_W0"}, narChunkFrames=500)]))
+
+
+CAPTURE_LAYERS =[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
 NAR_EVALS = [0, 21, 42, 63]
 
 

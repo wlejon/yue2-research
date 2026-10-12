@@ -56,8 +56,26 @@ mechanism before designing a use, and findings are measured numbers, not opinion
 ## Setup
 
     bash scripts/setup_venv.sh            # .venv over ../YuE2-3B/.venv + analysis packages
+    source scripts/gpu0.sh                # ALWAYS: GPU 0 only (see below)
     .venv/Scripts/python make_jobs.py exp1
-    YUE_JOB=jobs/exp1_gen.json ../bro/build/Release/bro-headless.exe native native/gen.js
+    YUE_JOB=jobs/exp1_gen.json bin/bro-headless.exe native native/gen.js
     .venv/Scripts/python seams.py runs/exp1 --out tables/exp1_seams.md
 
 Paths in a job are relative to the repo root (the working directory).
+
+**Binary.** `bin/` (git-ignored) is a snapshot of `../bro/build/Release`
+(bro-headless.exe, its DLLs and the bronze runtime) so measurements use one
+stable binary and bro can be rebuilt meanwhile: bro 87b92fb1, brosoundml
+ea4146a, built 2026-10-11 22:52. Copy it again (`bro-headless.exe *.dll
+bronze_runtime_shared.*`) to move to a newer build.
+
+**GPUs (this box has two 4090s).** GPU 1 (PCI bus 02:00.0) drives the desktop
+and must stay free. Every run — torch and bro-headless — sources
+`scripts/gpu0.sh`: `CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=0` (torch
+and brotensor's CUDA) and `BRO_VK_DEVICE=1` (the Vulkan index that is bus
+01:00.0 here; Vulkan's order is not nvidia-smi's). Before a long run, check
+`nvidia-smi --query-compute-apps=pid,gpu_bus_id --format=csv` shows nothing of
+ours on bus 02. Run the native and the reference model one at a time: together
+they do not fit in 24 GB. A job that needs more than GPU 0's 24 GB goes to halo
+(`ssh halo`, never `-A`; own build dir and `~/yue2-research-runs`, bring back
+tables only), never onto GPU 1.

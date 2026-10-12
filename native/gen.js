@@ -95,6 +95,7 @@ function saveHidden(dir, hidden, keep) {
 
 for (const run of job.runs) {
     const dir = job.out + '/' + run.name;
+    if (fs.existsSync(dir + '/run.json') && !job.force) { console.log(run.name + ': exists, skipped'); continue; }
     mkdirp(dir);
     const tl = { sem: [], lat: [], aud: [] };
     const audio = [];
