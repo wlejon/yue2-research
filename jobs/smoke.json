@@ -1,0 +1,7 @@
+{ "out": "runs/smoke", "arWeights": "int8", "vae": true,
+  "runs": [
+    { "name": "stream50", "style": "pop, upbeat, female vocal, piano, 110 bpm",
+      "lyrics": "[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\n",
+      "cot": "full", "seed": 7, "narChunkFrames": 50,
+      "semanticSampling": { "minTokens": 200, "maxTokens": 250 } }
+  ] }

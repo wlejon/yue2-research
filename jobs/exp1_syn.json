@@ -1,0 +1,118 @@
+{
+ "out": "runs/exp1",
+ "arWeights": "int8",
+ "vae": true,
+ "runs": [
+  {
+   "name": "folk_syn_W0",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 0
+  },
+  {
+   "name": "folk_syn_W25",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 25
+  },
+  {
+   "name": "folk_syn_W50",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 50
+  },
+  {
+   "name": "folk_syn_W100",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 100
+  },
+  {
+   "name": "folk_syn_W250",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 250
+  },
+  {
+   "name": "folk_syn_W0n2",
+   "mode": "synthesize",
+   "from": "runs/exp1/folk_gen_W0",
+   "narChunkFrames": 0,
+   "seed": 2
+  },
+  {
+   "name": "synthpop_syn_W0",
+   "mode": "synthesize",
+   "from": "runs/exp1/synthpop_gen_W0",
+   "narChunkFrames": 0
+  },
+  {
+   "name": "synthpop_syn_W25",
+   "mode": "synthesize",
+   "from": "runs/exp1/synthpop_gen_W0",
+   "narChunkFrames": 25
+  },
+  {
+   "name": "synthpop_syn_W50",
+   "mode": "synthesize",
+   "from": "runs/exp1/synthpop_gen_W0",
+   "narChunkFrames": 50
+  },
+  {
+   "name": "synthpop_syn_W100",
+   "mode": "synthesize",
+   "from": "runs/exp1/synthpop_gen_W0",
+   "narChunkFrames": 100
+  },
+  {
+   "name": "synthpop_syn_W250",
+   "mode": "synthesize",
+   "from": "runs/exp1/synthpop_gen_W0",
+   "narChunkFrames": 250
+  },
+  {
+   "name": "synthpop_syn_W0n2",
+   "mode": "synthesize",
+   "from": "runs/exp1/synthpop_gen_W0",
+   "narChunkFrames": 0,
+   "seed": 2
+  },
+  {
+   "name": "rock_syn_W0",
+   "mode": "synthesize",
+   "from": "runs/exp1/rock_gen_W0",
+   "narChunkFrames": 0
+  },
+  {
+   "name": "rock_syn_W25",
+   "mode": "synthesize",
+   "from": "runs/exp1/rock_gen_W0",
+   "narChunkFrames": 25
+  },
+  {
+   "name": "rock_syn_W50",
+   "mode": "synthesize",
+   "from": "runs/exp1/rock_gen_W0",
+   "narChunkFrames": 50
+  },
+  {
+   "name": "rock_syn_W100",
+   "mode": "synthesize",
+   "from": "runs/exp1/rock_gen_W0",
+   "narChunkFrames": 100
+  },
+  {
+   "name": "rock_syn_W250",
+   "mode": "synthesize",
+   "from": "runs/exp1/rock_gen_W0",
+   "narChunkFrames": 250
+  },
+  {
+   "name": "rock_syn_W0n2",
+   "mode": "synthesize",
+   "from": "runs/exp1/rock_gen_W0",
+   "narChunkFrames": 0,
+   "seed": 2
+  }
+ ]
+}

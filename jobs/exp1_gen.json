@@ -1,0 +1,55 @@
+{
+ "out": "runs/exp1",
+ "arWeights": "int8",
+ "vae": true,
+ "runs": [
+  {
+   "name": "folk_gen_W0",
+   "style": "indie folk, warm acoustic guitar, female vocal, 92 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n",
+   "cot": "full",
+   "seed": 1001,
+   "narChunkFrames": 0
+  },
+  {
+   "name": "folk_gen_W50",
+   "style": "indie folk, warm acoustic guitar, female vocal, 92 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n",
+   "cot": "full",
+   "seed": 1001,
+   "narChunkFrames": 50
+  },
+  {
+   "name": "synthpop_gen_W0",
+   "style": "synthwave, pop, male vocal, synth, drum machine, 118 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nNeon on the windshield, rain across the glass\nEvery station's playing songs about the past\nI keep driving slower so the night won't end\nCounting all the exits, counting every friend\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Verse]\nCoffee in the morning, sugar on the street\nSomebody is dancing to a broken beat\nShadows on the corner, laughter in the hall\nWe were never strangers, never strangers at all\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Outro]\n",
+   "cot": "full",
+   "seed": 1001,
+   "narChunkFrames": 0
+  },
+  {
+   "name": "synthpop_gen_W50",
+   "style": "synthwave, pop, male vocal, synth, drum machine, 118 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nNeon on the windshield, rain across the glass\nEvery station's playing songs about the past\nI keep driving slower so the night won't end\nCounting all the exits, counting every friend\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Verse]\nCoffee in the morning, sugar on the street\nSomebody is dancing to a broken beat\nShadows on the corner, laughter in the hall\nWe were never strangers, never strangers at all\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Outro]\n",
+   "cot": "full",
+   "seed": 1001,
+   "narChunkFrames": 50
+  },
+  {
+   "name": "rock_gen_W0",
+   "style": "rock, electric guitar, powerful vocal, tight drums, 128 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nNeon on the windshield, rain across the glass\nEvery station's playing songs about the past\nI keep driving slower so the night won't end\nCounting all the exits, counting every friend\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Verse]\nCoffee in the morning, sugar on the street\nSomebody is dancing to a broken beat\nShadows on the corner, laughter in the hall\nWe were never strangers, never strangers at all\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Outro]\n",
+   "cot": "full",
+   "seed": 1001,
+   "narChunkFrames": 0
+  },
+  {
+   "name": "rock_gen_W50",
+   "style": "rock, electric guitar, powerful vocal, tight drums, 128 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nNeon on the windshield, rain across the glass\nEvery station's playing songs about the past\nI keep driving slower so the night won't end\nCounting all the exits, counting every friend\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Verse]\nCoffee in the morning, sugar on the street\nSomebody is dancing to a broken beat\nShadows on the corner, laughter in the hall\nWe were never strangers, never strangers at all\n\n[Chorus]\nTurn it up, turn it up, let the radio play\nTurn it up, turn it up, till the dark goes away\nWe are the static, we are the sound\nSpinning forever, never coming down\n\n[Outro]\n",
+   "cot": "full",
+   "seed": 1001,
+   "narChunkFrames": 50
+  }
+ ]
+}

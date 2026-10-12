@@ -1,0 +1,2559 @@
+{
+ "out": "corpus/exp2",
+ "arWeights": "int8",
+ "vae": true,
+ "runs": [
+  {
+   "name": "pop_neutral_s11",
+   "style": "pop, female vocal, piano",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_energy+_s11",
+   "style": "pop, female vocal, piano, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_energy-_s11",
+   "style": "pop, female vocal, piano, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_tempo+_s11",
+   "style": "pop, female vocal, piano, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_tempo-_s11",
+   "style": "pop, female vocal, piano, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_density+_s11",
+   "style": "pop, female vocal, piano, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_density-_s11",
+   "style": "pop, female vocal, piano, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_timbre+_s11",
+   "style": "pop, female vocal, piano, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_timbre-_s11",
+   "style": "pop, female vocal, piano, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_vocal+_s11",
+   "style": "pop, female vocal, piano, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_vocal-_s11",
+   "style": "pop, female vocal, piano, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_neutral_s11",
+   "style": "rock, male vocal, electric guitar",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_energy+_s11",
+   "style": "rock, male vocal, electric guitar, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_energy-_s11",
+   "style": "rock, male vocal, electric guitar, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_tempo+_s11",
+   "style": "rock, male vocal, electric guitar, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_tempo-_s11",
+   "style": "rock, male vocal, electric guitar, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_density+_s11",
+   "style": "rock, male vocal, electric guitar, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_density-_s11",
+   "style": "rock, male vocal, electric guitar, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_timbre+_s11",
+   "style": "rock, male vocal, electric guitar, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_timbre-_s11",
+   "style": "rock, male vocal, electric guitar, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_vocal+_s11",
+   "style": "rock, male vocal, electric guitar, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_vocal-_s11",
+   "style": "rock, male vocal, electric guitar, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_neutral_s11",
+   "style": "folk, female vocal, acoustic guitar",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_energy+_s11",
+   "style": "folk, female vocal, acoustic guitar, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_energy-_s11",
+   "style": "folk, female vocal, acoustic guitar, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_tempo+_s11",
+   "style": "folk, female vocal, acoustic guitar, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_tempo-_s11",
+   "style": "folk, female vocal, acoustic guitar, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_density+_s11",
+   "style": "folk, female vocal, acoustic guitar, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_density-_s11",
+   "style": "folk, female vocal, acoustic guitar, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_timbre+_s11",
+   "style": "folk, female vocal, acoustic guitar, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_timbre-_s11",
+   "style": "folk, female vocal, acoustic guitar, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_vocal+_s11",
+   "style": "folk, female vocal, acoustic guitar, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_vocal-_s11",
+   "style": "folk, female vocal, acoustic guitar, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_neutral_s11",
+   "style": "electronic, male vocal, synth",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_energy+_s11",
+   "style": "electronic, male vocal, synth, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_energy-_s11",
+   "style": "electronic, male vocal, synth, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_tempo+_s11",
+   "style": "electronic, male vocal, synth, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_tempo-_s11",
+   "style": "electronic, male vocal, synth, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_density+_s11",
+   "style": "electronic, male vocal, synth, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_density-_s11",
+   "style": "electronic, male vocal, synth, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_timbre+_s11",
+   "style": "electronic, male vocal, synth, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_timbre-_s11",
+   "style": "electronic, male vocal, synth, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_vocal+_s11",
+   "style": "electronic, male vocal, synth, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_vocal-_s11",
+   "style": "electronic, male vocal, synth, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 11,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_neutral_s12",
+   "style": "pop, female vocal, piano",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_energy+_s12",
+   "style": "pop, female vocal, piano, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_energy-_s12",
+   "style": "pop, female vocal, piano, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_tempo+_s12",
+   "style": "pop, female vocal, piano, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_tempo-_s12",
+   "style": "pop, female vocal, piano, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_density+_s12",
+   "style": "pop, female vocal, piano, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_density-_s12",
+   "style": "pop, female vocal, piano, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_timbre+_s12",
+   "style": "pop, female vocal, piano, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_timbre-_s12",
+   "style": "pop, female vocal, piano, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_vocal+_s12",
+   "style": "pop, female vocal, piano, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "pop_vocal-_s12",
+   "style": "pop, female vocal, piano, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_neutral_s12",
+   "style": "rock, male vocal, electric guitar",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_energy+_s12",
+   "style": "rock, male vocal, electric guitar, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_energy-_s12",
+   "style": "rock, male vocal, electric guitar, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_tempo+_s12",
+   "style": "rock, male vocal, electric guitar, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_tempo-_s12",
+   "style": "rock, male vocal, electric guitar, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_density+_s12",
+   "style": "rock, male vocal, electric guitar, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_density-_s12",
+   "style": "rock, male vocal, electric guitar, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_timbre+_s12",
+   "style": "rock, male vocal, electric guitar, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_timbre-_s12",
+   "style": "rock, male vocal, electric guitar, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_vocal+_s12",
+   "style": "rock, male vocal, electric guitar, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "rock_vocal-_s12",
+   "style": "rock, male vocal, electric guitar, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_neutral_s12",
+   "style": "folk, female vocal, acoustic guitar",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_energy+_s12",
+   "style": "folk, female vocal, acoustic guitar, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_energy-_s12",
+   "style": "folk, female vocal, acoustic guitar, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_tempo+_s12",
+   "style": "folk, female vocal, acoustic guitar, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_tempo-_s12",
+   "style": "folk, female vocal, acoustic guitar, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_density+_s12",
+   "style": "folk, female vocal, acoustic guitar, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_density-_s12",
+   "style": "folk, female vocal, acoustic guitar, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_timbre+_s12",
+   "style": "folk, female vocal, acoustic guitar, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_timbre-_s12",
+   "style": "folk, female vocal, acoustic guitar, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_vocal+_s12",
+   "style": "folk, female vocal, acoustic guitar, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "folk_vocal-_s12",
+   "style": "folk, female vocal, acoustic guitar, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_neutral_s12",
+   "style": "electronic, male vocal, synth",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_energy+_s12",
+   "style": "electronic, male vocal, synth, energetic, powerful, intense",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_energy-_s12",
+   "style": "electronic, male vocal, synth, calm, gentle, soft",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_tempo+_s12",
+   "style": "electronic, male vocal, synth, fast, 150 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_tempo-_s12",
+   "style": "electronic, male vocal, synth, slow, 70 bpm",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_density+_s12",
+   "style": "electronic, male vocal, synth, full band, dense arrangement, layered",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_density-_s12",
+   "style": "electronic, male vocal, synth, sparse, minimal arrangement, solo",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_timbre+_s12",
+   "style": "electronic, male vocal, synth, bright, distorted, aggressive",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_timbre-_s12",
+   "style": "electronic, male vocal, synth, warm, mellow, dark",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_vocal+_s12",
+   "style": "electronic, male vocal, synth, vocal-forward, lead vocal",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  },
+  {
+   "name": "electro_vocal-_s12",
+   "style": "electronic, male vocal, synth, instrumental",
+   "lyrics": "[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\n",
+   "cot": "full",
+   "seed": 12,
+   "capture": {
+    "layers": [
+     0,
+     3,
+     6,
+     9,
+     12,
+     15,
+     18,
+     21,
+     24,
+     27
+    ],
+    "plan": false,
+    "semantic": true,
+    "narEvals": [
+     0,
+     21,
+     42,
+     63
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+# local sandbox artifacts — not checked in
+.venv/
+__pycache__/
+cache/
+runs/
+corpus/
+*.wav
+*.flac
+*.mp3
+*.npy
+*.npz
+*.pt
+*.bin
+*.f32
+*.i32
+!examples/*.flac
