@@ -232,6 +232,15 @@ The style still moves as with the plain bridge (43% of chunks, 78% of changes re
 
 Given the whole sheet, the stream sings its first verse, pre-chorus and chorus over and over. A window moved at a fixed rate either lags (one line a chunk: it sings slower than that, then sticks) or skips (two). Moving it past the last line Whisper heard in the rendered chunks (one chunk behind, 0.4 s of Whisper on the mix per chunk; one line on if nothing moved in 3 chunks) sings twice as many lines as the whole sheet, in order.
 
+## 11. The model knows which lyric word it is singing (one attention head)
+
+The four rolling-lyrics streams of 10 and the whole-sheet stream, re-run teacher-forced on the reference model with each chunk's own context (`lyric_track.py`), against where Whisper large-v3 heard each word on the vocal stem (word timestamps matched to the chunk's window, `lyric_labels.py`; 9,700 sung frames). Tables: `tables/exp8_lyric_track.md`.
+
+- **Head 14.10 is a lyric pointer.** The word it attends to most is the word being sung on 67% of frames (73% with the whole 40-line sheet in the prompt, 284 words), within one word on 84–87%, the right line on 85%. It runs 2 frames (80 ms) ahead of the voice. The next best heads (24.14, 20.14) reach 36–49%; most heads none.
+- **The residual does not carry it linearly.** Probes after every second layer: singing or not 71–78%, the window's line 25–39%. Position is in the attention, not as a direction in the stream. A probe over all 448 heads' attention reaches 65%, no better than 14.10 alone.
+- **For the rolling window it beats Whisper.** Per chunk, the furthest window line sung (96 chunks; truth from the stem's labels): head 14.10, counting a line when it pointed into 60% of its words while its mass on the lyrics was at least 0.2, is right on 89%, misses no sung line, and calls a line 11% of the time that the stem's Whisper did not hear. Whisper on the mix, what the stream uses now, is right on 54% and misses a sung line on 44% (the 3-chunk stall rule covers for it).
+- It costs nothing: the head's attention to the lyric tokens is in the forward pass the semantic stage already runs, read as each token is sampled, a chunk earlier than a decode and a transcription. The head and gate were picked on these 5 streams; a check on fresh streams and other voices is open.
+
 ## Continuous streaming: what this means for the design
 
 - **The stream is chunks, not songs.** 10 s chunks with 5–40 s of memory are seamless, never end, and cost under a third of the GPU, so two or three branches can be built ahead of a listener.
