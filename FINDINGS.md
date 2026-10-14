@@ -174,7 +174,7 @@ Folk to synth never arrived plainly at any memory. The history wins even at 5 s,
 ## 8. A score holds the tempo, in songs and in streams
 
 One score (exp1's folk and rock, cot full with the ABC supplied) in five styles x two seeds (`exp6.py`, tables `exp6_shared_score.md`):
-- Every render keeps the score's tempo: folk 89.1 bpm against `Q:1/4=90`, rock 129.2 against `Q:1/4=65` (double time).
+- Every render keeps the score's tempo: folk 89.1 bpm against `Q:1/4=90`, rock 129.2 against `Q:1/4=65` (double time). (89.1 is the tempogram's frame rounding: exp7's phase measurements show the folk score held at exactly 90, a beat of 16.667 frames.)
 - Two renders differ by an **offset** (the intro's length), not a drift. After one shift (the median lag of a windowed cross-correlation of the vocal stems' onsets), 88% of folk pairs line up within 50 ms. 6 of 10 rock renders line up within 25 ms of each other; the other 4 drift somewhere mid-song, so a render needs an alignment check before it is used as a layer.
 - **Harmony carries:** a vocal against another style's backing of the same score is as consonant as against its own (chroma cosine over sung frames 0.525 against 0.526; another song's backing 0.388).
 
@@ -191,13 +191,55 @@ htdemucs_ft (MIT code and weights; `sep.py`) on YuE2's output:
 
 A sung endless stream (the lyrics in every chunk's prefix, memory 500) walks the lyric sheet roughly in order (verse, pre-chorus, chorus, second verse by 100 s), then past the sheet it makes up lines ("We are the one", "Tomorrow starts through").
 
+## 10. Style changes that keep the beat; lyrics that keep going
+
+`native/endless.js` options, `exp7_eval.py`, tables `exp7_stream.md`. Scored tours (the folk score; synth, metal, jazz, orchestral, 40 s each, memory 250) are labelled against scored references (the same score, one style each; their chunks heard as their own style 93–100%). The beat across a join is measured as a phase: the comb phase at the score's period (exactly 2/3 s) of the 6 s before and the 6 s after, their distance in beats (0 = the beat goes on, 0.5 = the off-beat, random median 0.25). Inside a stream's own chunks the phase holds (median 0.02).
+
+**Memory drop.** The first chunk of a new style opened by only the last few tokens of the old music (`changeMemory`), the rest as usual:
+
+| lever | unscored: new style heard / changes reached | scored: heard / reached | scored: phase into the change |
+|---|---|---|---|
+| plain (memory 250) | 22% / 38% | 17% / 33% | 0.00 |
+| drop to 12 tokens (0.5 s) | **78% / 100%** | | |
+| drop to 25 (1 s) | 57% / 71% | 62% / 83% | 0.06 (2 of 6 jumped) |
+| drop to 50 (2 s) | 31% / 50% | 25% / 50% | 0.02 |
+| bridge | 75% / 100% | 42% / 84% | 0.00, then 0.31 into the fresh clip |
+
+Unscored, a 12-token drop moves the style as far as the bridge, for nothing extra (no fresh clip, no 4-candidate transition). The unscored styles each have their own tempo, so the beat changes with the style anyway. Under a score the trade is plain: the more memory, the less it moves, and the beat holds best at 2 s.
+
+**The bridge's beat, under a score.** The tempo is shared, so the beat into the fresh clip is a phase to set, at most one beat (17 frames) of cut from its start. In order:
+- Cutting the clip several ways and keeping the cut the bridge's NLL likes best does nothing: the uncut clip wins 7 of 9 times. The model's likelihood does not see the phase.
+- Measuring it: the stream's beat and a probe render of the fresh clip, then the cut that lines them up. Its error came from three places, each fixed in turn. (1) A fitted period (16.5–17.0 frames) extrapolated 20 s: fixed by the score's own, 16.667. (2) The stream read where the NAR had rendered it, a chunk behind; the last old chunk moved its phase (often by half a beat) as often as not: read at the bridge's end instead, from a probe render of the bridge. (3) The bridge's final render, a second NAR draw, put its accents half a beat from the probe's in 4 of 15: the probe render kept as the render.
+- The beat sensor: latent flux agrees with librosa's onset envelope (within 0.1 beats) in 69% of windows, an energy flux of the decoded audio in 82%, spectral flux (48 log bands, 100 fps, a 2048-point FFT in JS) in 90%, half a beat off in 4%.
+
+| into the fresh clip (21 bridges, 7 seeds) | within 0.11 beats | within 0.25 | median |
+|---|---|---|---|
+| plain bridge | 5 | 8 | 0.31 |
+| measured, energy flux, read at the bridge's end, probe kept | 13 | 14 | 0.08 |
+| **measured, spectral flux, read at the bridge's end, probe kept** | **15** | **20** | **0.05** |
+
+The style still moves as with the plain bridge (43% of chunks, 78% of changes reached, against 42% and 84%), and the measurement adds about 1 s per bridge (the fresh clip's probe render and decode; the bridge's probe is its render).
+
+**Lyrics.** A sung stream (memory 500, 24 chunks = 4 minutes) against a 40-line sheet with no line twice, transcribed per 10 s window from the separated vocal (Whisper large-v3; a line counts as sung when 60% of its words are heard):
+
+| lyrics in each chunk's prefix | distinct lines sung | furthest line | lines sung again later | words not in the sheet | sung lines inside the chunk's window |
+|---|---|---|---|---|---|
+| the whole sheet | 12 | 24 | **24** (it loops over lines 0–11) | 3% | |
+| a 4-line window, 1 line further each chunk | 12 | 21 | 1 | 5% | 75% |
+| a 4-line window, 2 lines further each chunk | 15 | 39 | 1 | 24% | 88% |
+| **a 4-line window after the last line heard** | **24** | 24 | 4 | 17% | 87% |
+| a 6-line window after the last line heard | 18 | 24 | 7 | 9% | 88% |
+
+Given the whole sheet, the stream sings its first verse, pre-chorus and chorus over and over. A window moved at a fixed rate either lags (one line a chunk: it sings slower than that, then sticks) or skips (two). Moving it past the last line Whisper heard in the rendered chunks (one chunk behind, 0.4 s of Whisper on the mix per chunk; one line on if nothing moved in 3 chunks) sings twice as many lines as the whole sheet, in order.
+
 ## Continuous streaming: what this means for the design
 
 - **The stream is chunks, not songs.** 10 s chunks with 5–40 s of memory are seamless, never end, and cost under a third of the GPU, so two or three branches can be built ahead of a listener.
-- **Moving through styles is a bridge, not a prompt edit.** Swapping the text does not move the music; a fresh clip plus a spliced transition always does, about 4.2 s of semantic sampling plus the two chunks' NAR, one chunk (10 s) after the request unless built ahead along a path.
-- **The beat across a bridge is the open problem.** A score fixes the tempo (exp6, exp5c), so fresh clips under one score share it. The phase still needs bridges a whole number of bars long (40 ms frames: a 120 bpm bar is 50 frames exactly) and the fresh clip started on the bar.
+- **Moving through styles is a structural move, not a prompt edit.** Swapping the text does not move the music. Without a score, dropping the memory to 0.5 s at the change moves it as reliably as a bridge, for free. Under a score, a bridge (a fresh clip plus a spliced transition) reaches 84% of changes within 40 s; a 1 s memory drop moves more chunks (62%) but jumps the beat a third of the time.
+- **The beat across a bridge is fixable under a score.** The score fixes the tempo; the phase is set by cutting the fresh clip's start at the beat read off the bridge's own render (spectral flux), 71% of joins within 0.11 beats and 95% within 0.25 (plain: 24% and 38%), about 1 s per bridge.
 - **A vocal layer over a moving backing is feasible.** Same score (tempo and chords), the vocal separated from one render and the backing from another, one shift aligns most pairs; 27x realtime separation keeps it live. Demos for listening: `runs/exp6/demos/*_backing.flac` (folk_orig_s1's and rock_orig_s1's vocal over each other render's backing, shifted).
-- **Not measured yet:** bar-aligned bridges under a score (the phase fix), a rolling lyric sheet (lyrics advance with the stream rather than run out), and whether the scored stream's style moves can be made as decisive as the unscored bridge.
+- **Lyrics roll.** The prefix carries a few lines at a time, moved on by what Whisper hears the stream sing; the whole sheet makes it loop.
+- **Not measured yet:** the measured cut by ear (the numbers are librosa's onset envelope; a residual 0.2-beat join may or may not be audible), the drop and the trimmed bridge combined, scores other than the folk one, and an adaptive lyric window in a scored stream (the score's melody is written for the whole sheet).
 
 ## Recommended design
 

@@ -92,6 +92,71 @@ Run to the river, run to the light
 Hold to the feeling, hold it tonight
 """
 
+# Exp 7 rolling lyrics: a long sheet with no line sung twice (no repeated
+# chorus), so a transcript line names one place in it.
+LYRICS["long"] = """[Verse]
+Light on the water, light on the sea
+Morning is calling, calling for me
+Boots on the gravel, coffee in hand
+Nobody told me, I had to stand
+
+[Pre-Chorus]
+And the wind keeps turning
+The old map burning
+
+[Chorus]
+Run to the river, run to the light
+Hold to the feeling, hold it tonight
+We were the fire, we were the flame
+Nothing between us will ever be the same
+
+[Verse]
+Paint on the ceiling, songs on the floor
+Somebody knocking, open the door
+Winter is over, summer is near
+Everything's changing, everything's here
+
+[Bridge]
+Oh, the city's sleeping
+Oh, the secrets keeping
+
+[Verse]
+Neon on the windshield, rain across the glass
+Every station's playing songs about the past
+I keep driving slower so the night won't end
+Counting all the exits, counting every friend
+
+[Chorus]
+Turn it up, turn it up, let the radio play
+Turn it up, turn it up, till the dark goes away
+We are the static, we are the sound
+Spinning forever, never coming down
+
+[Verse]
+Coffee in the morning, sugar on the street
+Somebody is dancing to a broken beat
+Shadows on the corner, laughter in the hall
+We were never strangers, never strangers at all
+
+[Verse]
+Lanterns in the harbor, ropes along the pier
+Sailors singing softly that the spring is here
+Salt upon my collar, sand inside my shoe
+Every road I wander brings me back to you
+
+[Chorus]
+Carry me home, carry me slow
+Over the mountains, under the snow
+Wherever you wander, wherever you roam
+Follow the bells and carry me home
+
+[Verse]
+Apples in the orchard, honey in the comb
+Grandma on the porch swing humming songs of home
+Thunder in the distance, swallows in the sky
+Nobody is leaving, nobody says goodbye
+"""
+
 # Exp 2 corpus: a base style per genre, and attribute poles appended to it.
 # Each (genre, seed) renders both poles of every axis, so a pole difference is
 # a paired contrast with everything else fixed.

@@ -260,5 +260,150 @@ def exp6():
     write("exp6", dict(out="runs/exp6", arWeights="int8", vae=True, runs=runs))
 
 
+def exp7():
+    """The open questions from exp5: (a) the bridge moves the style but drops
+    the beat at the fresh clip: does opening the change chunk with only the
+    last 0.5-2 s of the old music (changeMemory) keep the beat and still move?
+    (b) scored references, so a scored tour's chunks can be labelled against
+    styles under the same score, plus drop and CFG levers under the score;
+    (c) rolling lyrics: a lyric window that advances each chunk, against one
+    long sheet."""
+    from prompts import LYRICS, STREAM_STYLES
+    tour = [["folk", 4], ["synth", 4], ["metal", 4], ["lofi", 4], ["folk", 4]]
+    styles = dict(STREAM_STYLES)
+    styles["voice_long"] = dict(style=STREAM_STYLES["voice"]["style"], lyrics=LYRICS["long"])
+    pj = json.loads((ROOT / "runs/exp1/folk_gen_W0" / "plan.json").read_text(encoding="utf-8"))
+    skeys = [k for k in SCORE_STYLES if k != "orig"]
+    for key in skeys:
+        styles["score_" + key] = dict(style=SCORE_STYLES[key].format(base="", voice="female vocal", bpm=92),
+                                      lyrics=LYRICS["river"], abc=pj["abc"])
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = []
+    for seed in (1, 2):
+        for m in (12, 25, 50):
+            streams.append(dict(name=f"tour_m250_drop{m}_s{seed}", memory=250, seed=seed, changeMemory=m, schedule=tour))
+        for key in skeys:
+            streams.append(dict(name=f"scoref_{key}_s{seed}", memory=250, seed=10 + seed, cot="full",
+                                schedule=[["score_" + key, 8]]))
+        for m in (25, 50):
+            streams.append(dict(name=f"stour_m250_drop{m}_s{seed}", memory=250, seed=seed, cot="full", changeMemory=m,
+                                schedule=stour))
+        streams.append(dict(name=f"stour_m250_bridge_s{seed}", memory=250, seed=seed, cot="full", bridge=True,
+                            schedule=stour))
+        streams.append(dict(name=f"stour_m250_s{seed}", memory=250, seed=seed, cot="full", schedule=stour))
+    streams.append(dict(name="stour_m250_bridge_cfg2_s1", memory=250, seed=1, cot="full", bridge=True, cfgScale=2.0,
+                        schedule=stour))
+    lines = [l for l in LYRICS["long"].splitlines() if l.strip()]
+    for per in (1, 2):
+        streams.append(dict(name=f"roll_r{per}_w4", memory=500, seed=1, schedule=[["voice", 24]],
+                            lyricsRoll=dict(lines=lines, perChunk=per, window=4)))
+    streams.append(dict(name="sheet_long", memory=500, seed=1, schedule=[["voice_long", 24]]))
+    write("exp7", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7b():
+    """Exp 7's follow-ups. Under a score the bridge keeps the beat into the
+    bridge chunk but jumps it into the fresh clip, with the tempo shared:
+    bridgeTrims cuts the fresh clip n ways inside one beat and keeps the cut
+    the bridge leads into best (NLL). And lyrics that advance by what Whisper
+    hears in each rendered chunk, not at a fixed rate."""
+    from prompts import LYRICS
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name="stour_m250_bridge_s3", memory=250, seed=3, cot="full", bridge=True, schedule=stour)]
+    for seed in (1, 2, 3):
+        for n in (4, 8):
+            streams.append(dict(name=f"stour_m250_trim{n}_s{seed}", memory=250, seed=seed, cot="full", bridge=True,
+                                bridgeTrims=n, bridgeCandidates=1, trimSpan=17, schedule=stour))
+    lines = [l for l in LYRICS["long"].splitlines() if l.strip()]
+    for w in (4, 6):
+        streams.append(dict(name=f"roll_adapt_w{w}", memory=500, seed=1, schedule=[["voice", 24]],
+                            lyricsRoll=dict(lines=lines, perChunk=1, window=w, adaptive=True)))
+    write("exp7b", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7c():
+    """NLL does not see the beat (exp7b: the trims' best was the uncut clip 7
+    times in 9). phaseTrim measures it: the stream's beat from its latents,
+    the fresh clip's from a probe render, and the cut that lines them up.
+    Otherwise exp7's scored bridge (4 candidates), seeds 1-3."""
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name=f"stour_m250_phase_s{seed}", memory=250, seed=seed, cot="full", bridge=True, phaseTrim=True,
+                    trimSpan=17, beatFrames=16.835, schedule=stour) for seed in (1, 2, 3)]
+    write("exp7c", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7d():
+    """exp7c's beat fit let the period wander (16.5-17.0 frames) and the
+    20 s extrapolation to the join turned that into up to 0.4 beats; every
+    scored render holds Q:1/4=90 exactly, so the period is fixed at 16.667
+    frames and only the phases are measured."""
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name=f"stour_m250_phase90_s{seed}", memory=250, seed=seed, cot="full", bridge=True, phaseTrim=True,
+                    trimSpan=17, beatFrames=25 * 60 / 90, beatFit=False, schedule=stour) for seed in (1, 2, 3)]
+    write("exp7d", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7e():
+    """exp7d's misses split between the two sides of the fit (the latent
+    flux's phase is within 0.1 beats of the audio's in 71% of windows): the
+    beat read from the decoded audio instead (85%), seeds 1-5, and the plain
+    bridge on seeds 4-5 to match."""
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name=f"stour_m250_phaseaudio_s{seed}", memory=250, seed=seed, cot="full", bridge=True,
+                    phaseTrim=True, beatSensor="audio", trimSpan=17, beatFrames=25 * 60 / 90, schedule=stour)
+               for seed in (1, 2, 3, 4, 5)]
+    streams += [dict(name=f"stour_m250_bridge_s{seed}", memory=250, seed=seed, cot="full", bridge=True, schedule=stour)
+                for seed in (4, 5)]
+    write("exp7e", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7f():
+    """exp7e's sensors were right on both sides (stream fit within 0.08 beats
+    of the audio in 12 of 15, the fresh clip placed within 0.09 of where it
+    was heard in 14 of 15), and still 7 of 15 joins missed: the stream moved
+    its phase after the window the fit saw (often by half a beat inside the
+    last old chunk, which the NAR had not rendered yet). phaseFrom 'bridge'
+    reads the beat at the bridge's end, from a probe render, and cuts the
+    fresh clip after the bridge is written."""
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name=f"stour_m250_phasebridge_s{seed}", memory=250, seed=seed, cot="full", bridge=True,
+                    phaseFrom="bridge", trimSpan=17, beatFrames=25 * 60 / 90, schedule=stour)
+               for seed in (1, 2, 3, 4, 5)]
+    write("exp7f", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7g():
+    """exp7f's misses: 4 of 5 the bridge's final render put its accents half
+    a beat from where its probe render had them (a second NAR draw), 2 the
+    energy sensor and librosa disagreeing by half a beat on the same audio.
+    keepProbe: the probe render of the bridge is its render."""
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name=f"stour_m250_phasekeep_s{seed}", memory=250, seed=seed, cot="full", bridge=True,
+                    phaseFrom="bridge", keepProbe=True, trimSpan=17, beatFrames=25 * 60 / 90, schedule=stour)
+               for seed in (1, 2, 3, 4, 5, 6, 7)]
+    streams += [dict(name=f"stour_m250_bridge_s{seed}", memory=250, seed=seed, cot="full", bridge=True, schedule=stour)
+                for seed in (6, 7)]
+    write("exp7g", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
+def exp7h():
+    """exp7g's misses were all the sensor: the trim's energy flux and the
+    judging librosa envelope half a beat apart on the same audio. The beat
+    read with spectral flux instead (half a beat off librosa in 4% of 10 s
+    windows, energy flux 11%), seeds 1-7, else as exp7g."""
+    styles = json.loads((JOBS / "exp7.json").read_text(encoding="utf-8"))["styles"]
+    stour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = [dict(name=f"stour_m250_phasespec_s{seed}", memory=250, seed=seed, cot="full", bridge=True,
+                    phaseFrom="bridge", keepProbe=True, beatSensor="spectral", trimSpan=17, beatFrames=25 * 60 / 90,
+                    schedule=stour) for seed in range(1, 8)]
+    write("exp7h", dict(out="runs/exp7", arWeights="int8", styles=styles, streams=streams))
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]](*sys.argv[2:])
