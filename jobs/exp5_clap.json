@@ -1,0 +1,4 @@
+{ "roots": ["runs/exp5"], "out": "runs/exp5", "runs": [], "force": true,
+  "texts": ["indie folk, acoustic guitar, warm, gentle", "synthwave, synth, drum machine, pads",
+            "heavy metal, distorted electric guitar, double kick drums, aggressive", "lo-fi hip hop, Rhodes piano, vinyl crackle, laid-back",
+            "pop, female vocal, piano, tight drums"] }
