@@ -212,7 +212,8 @@ for (const st of job.streams) {
     // line k * perChunk. Adaptive: starting after the last line Whisper heard
     // in the chunks rendered so far (chunk k-2 and before: the NAR runs one
     // chunk behind), one line further if it has not moved for 3 chunks.
-    const roll = st.lyricsRoll;
+    // lyricsRoll.sheet names one of job.sheets in place of its own lines.
+    const roll = st.lyricsRoll && st.lyricsRoll.sheet ? { ...st.lyricsRoll, lines: job.sheets[st.lyricsRoll.sheet] } : st.lyricsRoll;
     const sung = roll ? roll.lines.map((l, i) => [l, i]).filter(([l]) => !/^\[/.test(l)) : [];
     const words = (t) => (t.toLowerCase().replace(/’/g, "'").match(/[a-z']+/g) || []);
     const sungWords = sung.map(([l]) => words(l));

@@ -66,3 +66,25 @@
 | head 14.10, lyric mass >= 0.1 | 85% | 7% | 0% | 15% |
 | head 14.10, lyric mass >= 0.2 | 89% | 4% | 0% | 11% |
 | head 14.10, lyric mass >= 0.3 | 89% | 6% | 1% | 10% |
+
+## Head 14.10 on fresh streams (runs\exp8\streams: rock_m_harbor, folk_m_desert, soul_f_harbor, country_m_desert, edm_f_desert, ballad_f_harbor), lag -2
+
+| stream | sung frames | right word | within one word | right line |
+|---|---|---|---|---|
+| rock_m_harbor | 933 | 72% | 84% | 83% |
+| folk_m_desert | 318 | 69% | 72% | 82% |
+| soul_f_harbor | 904 | 50% | 70% | 68% |
+| country_m_desert | 1522 | 77% | 88% | 89% |
+| edm_f_desert | 845 | 78% | 88% | 88% |
+| ballad_f_harbor | 1475 | 70% | 92% | 90% |
+| all | 5997 | 70% | 85% | 84% |
+
+## The rolling window's question per chunk: the furthest window line sung (84 chunks)
+
+| reader | right | one line off | missed a sung line | heard a line not sung |
+|---|---|---|---|---|
+| Whisper on the mix (the stream now) | 51% | 7% | 49% | 0% |
+| head 14.10, lyric mass >= 0.05 | 70% | 12% | 0% | 30% |
+| head 14.10, lyric mass >= 0.1 | 75% | 8% | 0% | 25% |
+| head 14.10, lyric mass >= 0.2 | 77% | 8% | 0% | 23% |
+| head 14.10, lyric mass >= 0.3 | 77% | 8% | 0% | 23% |

@@ -20,6 +20,7 @@ eval: against the Whisper word labels (lyric_labels.py), per frame:
 Writes runs/exp8/track/<run>/<k>.npz and tables/exp8_lyric_track.md.
 """
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -27,7 +28,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-EXP7 = Path("runs/exp7")
+EXP7 = Path(os.environ.get("RUNS", "runs/exp7"))     # RUNS + JOB: runs/exp8/streams + jobs/exp8.json
+JOB = Path(os.environ.get("JOB", "jobs/exp7.json"))
 LABELS = Path("runs/exp8/labels")
 TRACK = Path("runs/exp8/track")
 RES_LAYERS = list(range(1, 28, 2))      # residual after layers 1, 3, ..., 27
@@ -66,7 +68,7 @@ def extract(runs):
     for run in runs:
         d = EXP7 / run
         info = json.loads((d / "chunks.json").read_text(encoding="utf-8"))
-        job = json.loads(Path("jobs/exp7.json").read_text(encoding="utf-8"))
+        job = json.loads(JOB.read_text(encoding="utf-8"))
         tokens = np.fromfile(d / "tokens.i32", dtype=np.int32)
         out = TRACK / run
         out.mkdir(parents=True, exist_ok=True)
@@ -330,5 +332,34 @@ def roll(runs, head=(14, 10)):
         f.write("\n".join(out) + "\n")
 
 
+def check(runs, head=(14, 10), lag=-2):
+    """The head picked on exp7, unchanged, on other streams: frames, then roll()."""
+    li, h = head
+    data = load(runs)
+    out = ["", f"## Head {li}.{h} on fresh streams ({EXP7}: {', '.join(runs)}), lag {lag}", "",
+           "| stream | sung frames | right word | within one word | right line |", "|---|---|---|---|---|"]
+    tot = np.zeros(4)
+    for run in runs + ["all"]:
+        if run == "all":
+            n, a, b, c = tot
+        else:
+            n = a = b = c = 0
+            for x in data:
+                if x["run"] != run:
+                    continue
+                lab = shift(x["label"], lag)
+                m = lab >= 0
+                pred = x["att"][li, h][m].argmax(-1)
+                y = lab[m]
+                n += m.sum(); a += (pred == y).sum(); b += (np.abs(pred - y) <= 1).sum()
+                c += (x["line"][pred] == x["line"][y]).sum()
+            tot += (n, a, b, c)
+        out.append(f"| {run} | {int(n)} | {a / max(n, 1):.0%} | {b / max(n, 1):.0%} | {c / max(n, 1):.0%} |")
+    print("\n".join(out))
+    with open("tables/exp8_lyric_track.md", "a", encoding="utf-8") as f:
+        f.write("\n".join(out) + "\n")
+    roll(runs, head)
+
+
 if __name__ == "__main__":
-    {"extract": extract, "eval": evaluate, "roll": roll}[sys.argv[1]](sys.argv[2:])
+    {"extract": extract, "eval": evaluate, "roll": roll, "check": check}[sys.argv[1]](sys.argv[2:])

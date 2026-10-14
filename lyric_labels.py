@@ -12,6 +12,7 @@ Writes runs/exp8/labels/<run>.json.
 """
 import difflib
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -19,7 +20,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-EXP7 = Path("runs/exp7")
+EXP7 = Path(os.environ.get("RUNS", "runs/exp7"))     # RUNS=runs/exp8/streams for the fresh streams
 OUT = Path("runs/exp8/labels")
 FPS = 25
 
