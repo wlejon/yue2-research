@@ -188,6 +188,50 @@ def exp5():
     write("exp5", dict(out="runs/exp5", arWeights="int8", styles=STREAM_STYLES, streams=streams))
 
 
+def exp5b():
+    """Exp 5 showed a style change barely moves a continuing stream (the
+    history wins even at 5 s). Two levers on the same tour: CFG (the negative
+    is the same history with no tags, so the scale amplifies what the new tags
+    add), and a bridge (a fresh clip of the new style, and splice's transition
+    into it from the old music)."""
+    from prompts import STREAM_STYLES
+    tour = [["folk", 4], ["synth", 4], ["metal", 4], ["lofi", 4], ["folk", 4]]
+    streams = []
+    for m in (250, 500):
+        for seed in (1, 2):
+            for g in (1.5, 2.0, 3.0):
+                streams.append(dict(name=f"tour_m{m}_cfg{g:g}_s{seed}", memory=m, seed=seed, cfgScale=g, schedule=tour))
+            streams.append(dict(name=f"tour_m{m}_bridge_s{seed}", memory=m, seed=seed, bridge=True, schedule=tour))
+    for seed in (1, 2):
+        streams.append(dict(name=f"tour_m250_bridge_cfg2_s{seed}", memory=250, seed=seed, bridge=True, cfgScale=2.0,
+                            schedule=tour))
+    for g in (2.0, 3.0):
+        streams.append(dict(name=f"const_folk_m500_cfg{g:g}", memory=500, seed=1, cfgScale=g, schedule=[["folk", 18]]))
+    write("exp5b", dict(out="runs/exp5", arWeights="int8", styles=STREAM_STYLES, streams=streams))
+
+
+def exp5c():
+    """An endless stream under a score: every chunk's prefix carries exp1's
+    folk score (cot full, the ABC supplied) and its lyrics, the style text
+    changes on the tour. Does the score's tempo hold across chunks and style
+    changes, and does a change move the sound?"""
+    from prompts import LYRICS
+    pj = json.loads((ROOT / "runs/exp1/folk_gen_W0/plan.json").read_text(encoding="utf-8"))
+    styles = {}
+    for key, fmt in SCORE_STYLES.items():
+        if key == "orig":
+            continue
+        styles["score_" + key] = dict(style=fmt.format(base="", voice="female vocal", bpm=92), lyrics=LYRICS["river"],
+                                      abc=pj["abc"])
+    tour = [["score_synth", 4], ["score_metal", 4], ["score_jazz", 4], ["score_orch", 4]]
+    streams = []
+    for m in (250, 500):
+        streams.append(dict(name=f"score_tour_m{m}", memory=m, seed=1, cot="full", schedule=tour))
+        streams.append(dict(name=f"score_tour_m{m}_bridge", memory=m, seed=1, cot="full", bridge=True, schedule=tour))
+    streams.append(dict(name="score_const_m500", memory=500, seed=1, cot="full", schedule=[["score_synth", 18]]))
+    write("exp5c", dict(out="runs/exp5", arWeights="int8", styles=styles, streams=streams))
+
+
 SCORE_STYLES = {
     "orig": "{base}",
     "synth": "synthwave, synth, drum machine, {voice}, {bpm} bpm",

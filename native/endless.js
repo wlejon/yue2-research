@@ -42,7 +42,10 @@ function planFor(key, cot) {
     if (plans.has(k)) return plans.get(k);
     const s = job.styles[key];
     const t = now();
-    const r = wait((done) => yue.plan({ style: s.style, lyrics: s.lyrics, cot, seed: 1, onDone: done }), 'plan ' + key);
+    // A style with an abc is planned from it (the plan stage skipped): a stream under a score.
+    const o = { ...(s.abc ? { abc: s.abc } : {}), style: s.style, lyrics: s.lyrics, cot, seed: 1 };
+    if (s.abc) o.abc = s.abc;
+    const r = wait((done) => yue.plan(Object.assign(o, { onDone: done })), 'plan ' + key);
     const p = { plan: r.plan, seconds: now() - t };
     plans.set(k, p);
     return p;
@@ -71,24 +74,50 @@ for (const st of job.streams) {
     const rows = order.map((key, k) => ({ k, style: key, f0: k * C, f1: (k + 1) * C }));
     const t0 = now();
 
-    // Semantic: chunk after chunk, each opened by the last M tokens.
+    // Semantic: chunk after chunk, each opened by the last M tokens. With
+    // st.bridge, a style change is a composed transition instead: chunk k+1
+    // is a fresh clip of the new style (no history), and chunk k the bridge
+    // splice() writes from the old music into it (st.bridgeCandidates drawn,
+    // the one the fresh clip follows best kept).
+    const cfg = st.cfgScale === undefined ? {} : { cfgScale: st.cfgScale };
     let tokens = new Int32Array(0);
+    const append = (m) => { const nt = new Int32Array(tokens.length + m.length); nt.set(tokens); nt.set(m, tokens.length); tokens = nt; };
     for (let k = 0; k < K; k++) {
         const s = job.styles[order[k]];
         const p = planFor(order[k], cot);
         const before = tokens.subarray(Math.max(0, tokens.length - M));
+        const change = k > 0 && order[k] !== order[k - 1];
+        if (st.bridge && change && k + 1 < K && order[k + 1] === order[k]) {
+            const t = now();
+            const fresh = wait((done) => yue.splice(p.plan, Object.assign({
+                ...(s.abc ? { abc: s.abc } : {}), style: s.style, lyrics: s.lyrics, cot, seed: seed * 1000 + k + 1,
+                before: new Int32Array(0), middleFrames: C, candidates: 1, continue: false, onDone: done }, cfg)),
+                st.name + ' fresh ' + (k + 1));
+            const B = fresh.semantic.subarray(fresh.middle0, fresh.middle0 + C).slice();
+            const t1 = now();
+            const r = wait((done) => yue.splice(p.plan, Object.assign({
+                ...(s.abc ? { abc: s.abc } : {}), style: s.style, lyrics: s.lyrics, cot, seed: seed * 1000 + k,
+                before: before.slice(), middleFrames: C, after: B, candidates: st.bridgeCandidates || 4,
+                scoreFrames: 125, continue: false, onDone: done }, cfg)), st.name + ' bridge ' + k);
+            rows[k].spliceSeconds = now() - t1;
+            rows[k + 1].spliceSeconds = t1 - t;
+            rows[k].memory = before.length; rows[k].bridge = true; rows[k].scores = Array.from(r.scores);
+            rows[k + 1].memory = 0; rows[k + 1].fresh = true;
+            append(r.semantic.subarray(r.middle0, r.middle0 + C));
+            append(B);
+            k++;
+            continue;
+        }
         const t = now();
-        const r = wait((done) => yue.splice(p.plan, {
-            style: s.style, lyrics: s.lyrics, cot, seed: seed * 1000 + k,
+        const r = wait((done) => yue.splice(p.plan, Object.assign({
+            ...(s.abc ? { abc: s.abc } : {}), style: s.style, lyrics: s.lyrics, cot, seed: seed * 1000 + k,
             before: before.slice(), middleFrames: C, candidates: 1, continue: false,
-            onDone: done }), st.name + ' splice ' + k);
+            onDone: done }, cfg)), st.name + ' splice ' + k);
         rows[k].spliceSeconds = now() - t;
         rows[k].memory = before.length;
         const m = r.semantic.subarray(r.middle0, r.middle0 + C);
         if (m.length !== C) throw new Error(st.name + ' chunk ' + k + ': ' + m.length + ' tokens, wanted ' + C);
-        const nt = new Int32Array(tokens.length + C);
-        nt.set(tokens); nt.set(m, tokens.length);
-        tokens = nt;
+        append(m);
     }
 
     // NAR: each chunk inpainted over its window, the lookahead solved and dropped.
@@ -104,7 +133,7 @@ for (const st of job.streams) {
         wl.set(lat.subarray(s0 * 64, c0 * 64));
         const t = now();
         const r = wait((done) => yue.inpaint(p.plan, win, wl, c0 - s0, e1 - s0, {
-            style: s.style, lyrics: s.lyrics, cot, seed: seed * 1000 + 500 + k, odeSteps: ode,
+            ...(s.abc ? { abc: s.abc } : {}), style: s.style, lyrics: s.lyrics, cot, seed: seed * 1000 + 500 + k, odeSteps: ode,
             onDone: done }), st.name + ' inpaint ' + k);
         rows[k].inpaintSeconds = now() - t;
         rows[k].narWindow = win.length;
@@ -123,6 +152,7 @@ for (const st of job.streams) {
     writeBin(dir + '/audio.f32', a.samples);
     writeJson(dir + '/chunks.json', {
         name: st.name, memory: M, chunk: C, lookahead: LA, narLeft: NL, cot, seed, odeSteps: ode,
+        cfgScale: st.cfgScale, bridge: !!st.bridge,
         frames: T, audioFrames: a.frames, wall: now() - t0,
         plans: Object.fromEntries([...plans].map(([k, v]) => [k, { seconds: v.seconds, prefix: v.plan.prefix.length }])),
         schedule: st.schedule, chunks: rows,

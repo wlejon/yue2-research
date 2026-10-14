@@ -1,0 +1,138 @@
+{
+ "out": "runs/exp5",
+ "arWeights": "int8",
+ "styles": {
+  "score_synth": {
+   "style": "synthwave, synth, drum machine, female vocal, 92 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n",
+   "abc": "X:1\nT:\nM:2/4\nL:1/16\nQ:1/4=90\nV: Vocal clef=treble name=\"Vocal Melody\" snm=\"Vocal\"\nV: Ins clef=treble name=\"Ins Melody\" snm=\"Inst.\"\nK:Dm\n% intro\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nZ|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nD2F3FFF|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\nV: Ins\nG2G3GGc|Z3|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"gz6z|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"cd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d2ddd2f2|\"Dm\"z8|\"F\"AAA2A4|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AA2AA4|\"F\"z4zcc2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d4a4|\"Bb\"d4c3c|\"C\"d4a4|\"C\"d4c4|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\"C\"z6za-|\nV: Ins\nZ2|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"g2ccc2cg-|\"Gm\"g2ddd2za-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"A2AAA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddddd2f2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AAA2A2z2|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% bridge\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z6a2|\"F\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z8|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% outro\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n"
+  },
+  "score_jazz": {
+   "style": "jazz-funk, Rhodes piano, groovy bass, female vocal, 92 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n",
+   "abc": "X:1\nT:\nM:2/4\nL:1/16\nQ:1/4=90\nV: Vocal clef=treble name=\"Vocal Melody\" snm=\"Vocal\"\nV: Ins clef=treble name=\"Ins Melody\" snm=\"Inst.\"\nK:Dm\n% intro\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nZ|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nD2F3FFF|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\nV: Ins\nG2G3GGc|Z3|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"gz6z|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"cd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d2ddd2f2|\"Dm\"z8|\"F\"AAA2A4|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AA2AA4|\"F\"z4zcc2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d4a4|\"Bb\"d4c3c|\"C\"d4a4|\"C\"d4c4|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\"C\"z6za-|\nV: Ins\nZ2|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"g2ccc2cg-|\"Gm\"g2ddd2za-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"A2AAA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddddd2f2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AAA2A2z2|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% bridge\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z6a2|\"F\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z8|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% outro\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n"
+  },
+  "score_metal": {
+   "style": "heavy metal, distorted electric guitar, female vocal, 92 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n",
+   "abc": "X:1\nT:\nM:2/4\nL:1/16\nQ:1/4=90\nV: Vocal clef=treble name=\"Vocal Melody\" snm=\"Vocal\"\nV: Ins clef=treble name=\"Ins Melody\" snm=\"Inst.\"\nK:Dm\n% intro\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nZ|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nD2F3FFF|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\nV: Ins\nG2G3GGc|Z3|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"gz6z|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"cd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d2ddd2f2|\"Dm\"z8|\"F\"AAA2A4|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AA2AA4|\"F\"z4zcc2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d4a4|\"Bb\"d4c3c|\"C\"d4a4|\"C\"d4c4|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\"C\"z6za-|\nV: Ins\nZ2|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"g2ccc2cg-|\"Gm\"g2ddd2za-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"A2AAA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddddd2f2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AAA2A2z2|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% bridge\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z6a2|\"F\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z8|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% outro\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n"
+  },
+  "score_orch": {
+   "style": "orchestral, strings, piano, female vocal, 92 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n",
+   "abc": "X:1\nT:\nM:2/4\nL:1/16\nQ:1/4=90\nV: Vocal clef=treble name=\"Vocal Melody\" snm=\"Vocal\"\nV: Ins clef=treble name=\"Ins Melody\" snm=\"Inst.\"\nK:Dm\n% intro\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nZ|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"Dm\"z8|\"Dm\"z8|\"F\"z8|\"C\"z8|\nV: Ins\nD2F3FFF|D2F3FFF|F2A3FFF|G2G3GGG|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\nV: Ins\nG2G3GGc|Z3|\nV: Vocal\n\"C\"z8|\"Dm\"d4a4|\"F\"c'4a4|\"C\"gz6z|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"cd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d2ddd2f2|\"Dm\"z8|\"F\"AAA2A4|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AA2AA4|\"F\"z4zcc2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d4a4|\"Bb\"d4c3c|\"C\"d4a4|\"C\"d4c4|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\"C\"z6za-|\nV: Ins\nZ2|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"g2ccc2cg-|\"Gm\"g2ddd2za-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% verse\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"A2AAA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"dd2dd2c2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddddd2f2|\"Dm\"z8|\"F\"AA2AA2z2|\"F\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"ddd2d2c2|\"Dm\"z8|\"F\"AAA2A2z2|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc2zg-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% bridge\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z6a2|\"F\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Bb\"d6a2|\"Bb\"g3agfd2|\"C\"z6a2|\"C\"g2f2d2c2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d6a2|\"Dm\"g3agfd2|\"F\"z8|\"F\"z6za-|\nV: Ins\nZ4|\n% chorus\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"g2ccc2cg-|\"Gm\"g2ddd3a-|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"a2ddd2da-|\"F\"a2ccc3g-|\"C\"gg2gg2f2|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"zggag2f2|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\n% outro\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"Dm\"d4a4|\"F\"c'4a4|\"C\"g4z4|\"C\"z8|\nV: Ins\nZ4|\nV: Vocal\n\"C\"z8|\nV: Ins\nZ|\n"
+  }
+ },
+ "streams": [
+  {
+   "name": "score_tour_m250",
+   "memory": 250,
+   "seed": 1,
+   "cot": "full",
+   "schedule": [
+    [
+     "score_synth",
+     4
+    ],
+    [
+     "score_metal",
+     4
+    ],
+    [
+     "score_jazz",
+     4
+    ],
+    [
+     "score_orch",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "score_tour_m250_bridge",
+   "memory": 250,
+   "seed": 1,
+   "cot": "full",
+   "bridge": true,
+   "schedule": [
+    [
+     "score_synth",
+     4
+    ],
+    [
+     "score_metal",
+     4
+    ],
+    [
+     "score_jazz",
+     4
+    ],
+    [
+     "score_orch",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "score_tour_m500",
+   "memory": 500,
+   "seed": 1,
+   "cot": "full",
+   "schedule": [
+    [
+     "score_synth",
+     4
+    ],
+    [
+     "score_metal",
+     4
+    ],
+    [
+     "score_jazz",
+     4
+    ],
+    [
+     "score_orch",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "score_tour_m500_bridge",
+   "memory": 500,
+   "seed": 1,
+   "cot": "full",
+   "bridge": true,
+   "schedule": [
+    [
+     "score_synth",
+     4
+    ],
+    [
+     "score_metal",
+     4
+    ],
+    [
+     "score_jazz",
+     4
+    ],
+    [
+     "score_orch",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "score_const_m500",
+   "memory": 500,
+   "seed": 1,
+   "cot": "full",
+   "schedule": [
+    [
+     "score_synth",
+     18
+    ]
+   ]
+  }
+ ]
+}

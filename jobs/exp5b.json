@@ -1,0 +1,558 @@
+{
+ "out": "runs/exp5",
+ "arWeights": "int8",
+ "styles": {
+  "folk": {
+   "style": "indie folk, acoustic guitar, warm, gentle, 92 bpm",
+   "lyrics": "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n"
+  },
+  "synth": {
+   "style": "synthwave, synth, drum machine, pads, 118 bpm",
+   "lyrics": "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n"
+  },
+  "metal": {
+   "style": "heavy metal, distorted electric guitar, double kick drums, aggressive, 140 bpm",
+   "lyrics": "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n"
+  },
+  "lofi": {
+   "style": "lo-fi hip hop, Rhodes piano, vinyl crackle, laid-back, 80 bpm",
+   "lyrics": "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n"
+  },
+  "voice": {
+   "style": "pop, female vocal, piano, tight drums, 100 bpm",
+   "lyrics": "[Intro]\n\n[Verse]\nLight on the water, light on the sea\nMorning is calling, calling for me\nBoots on the gravel, coffee in hand\nNobody told me, I had to stand\n\n[Pre-Chorus]\nAnd the wind keeps turning\nThe old map burning\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Verse]\nPaint on the ceiling, songs on the floor\nSomebody knocking, open the door\nWinter is over, summer is near\nEverything's changing, everything's here\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Bridge]\nOh, the city's sleeping\nOh, the secrets keeping\n\n[Chorus]\nRun to the river, run to the light\nHold to the feeling, hold it tonight\nWe were the fire, we were the flame\nNothing between us will ever be the same\n\n[Outro]\n"
+  }
+ },
+ "streams": [
+  {
+   "name": "tour_m250_cfg1.5_s1",
+   "memory": 250,
+   "seed": 1,
+   "cfgScale": 1.5,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_cfg2_s1",
+   "memory": 250,
+   "seed": 1,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_cfg3_s1",
+   "memory": 250,
+   "seed": 1,
+   "cfgScale": 3.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_bridge_s1",
+   "memory": 250,
+   "seed": 1,
+   "bridge": true,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_cfg1.5_s2",
+   "memory": 250,
+   "seed": 2,
+   "cfgScale": 1.5,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_cfg2_s2",
+   "memory": 250,
+   "seed": 2,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_cfg3_s2",
+   "memory": 250,
+   "seed": 2,
+   "cfgScale": 3.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_bridge_s2",
+   "memory": 250,
+   "seed": 2,
+   "bridge": true,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_cfg1.5_s1",
+   "memory": 500,
+   "seed": 1,
+   "cfgScale": 1.5,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_cfg2_s1",
+   "memory": 500,
+   "seed": 1,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_cfg3_s1",
+   "memory": 500,
+   "seed": 1,
+   "cfgScale": 3.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_bridge_s1",
+   "memory": 500,
+   "seed": 1,
+   "bridge": true,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_cfg1.5_s2",
+   "memory": 500,
+   "seed": 2,
+   "cfgScale": 1.5,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_cfg2_s2",
+   "memory": 500,
+   "seed": 2,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_cfg3_s2",
+   "memory": 500,
+   "seed": 2,
+   "cfgScale": 3.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m500_bridge_s2",
+   "memory": 500,
+   "seed": 2,
+   "bridge": true,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_bridge_cfg2_s1",
+   "memory": 250,
+   "seed": 1,
+   "bridge": true,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "tour_m250_bridge_cfg2_s2",
+   "memory": 250,
+   "seed": 2,
+   "bridge": true,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     4
+    ],
+    [
+     "synth",
+     4
+    ],
+    [
+     "metal",
+     4
+    ],
+    [
+     "lofi",
+     4
+    ],
+    [
+     "folk",
+     4
+    ]
+   ]
+  },
+  {
+   "name": "const_folk_m500_cfg2",
+   "memory": 500,
+   "seed": 1,
+   "cfgScale": 2.0,
+   "schedule": [
+    [
+     "folk",
+     18
+    ]
+   ]
+  },
+  {
+   "name": "const_folk_m500_cfg3",
+   "memory": 500,
+   "seed": 1,
+   "cfgScale": 3.0,
+   "schedule": [
+    [
+     "folk",
+     18
+    ]
+   ]
+  }
+ ]
+}

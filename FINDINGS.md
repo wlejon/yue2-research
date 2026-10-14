@@ -1,6 +1,6 @@
 # YuE2 research: findings
 
-Provenance:
+Provenance (sections 1-6; sections 7-9 use bin2, bro fa2e8a81 + brosoundml ffab953 + brotensor 6012b83):
 - Native numbers come from the `bin/` snapshot (bro `87b92fb1`, brosoundml `ea4146a`, Release, INT8 AR) on GPU 0, a 4090 on bus 01.
 - Reference numbers come from PyTorch `yue2` (BF16 eager, on bus 01 or GPU 1). Its timings are not latency claims; only the native timings are.
 - Songs: folk, rock and synthpop, 170–184 s, cot full.
@@ -139,6 +139,66 @@ The plan sits in the prefix ahead of every codec token, though, so editing it re
 
 Tables: `exp4_slide_folk.json`, `exp4b_plan.json`, `exp4c_plan_edits.md`.
 
+## 7. An endless stream of 10 s chunks
+
+No songs: one token history, and every 10 s chunk is a `splice()` opened by the last N tokens of it (positions re-based each chunk, cot off), rendered by `inpaint()` with up to 475 solved frames kept on the left and 25 frames of lookahead solved and dropped (`native/endless.js`, bin2 = bro fa2e8a81). Style references are fresh streams per style; "heard as" is a chunk's nearest reference centroid in CLAP space (the references' own chunks: 91–100% right). Tables: `exp5_endless.md`.
+
+Cost and seams:
+- A 10 s chunk costs 0.76–0.93 s of semantic sampling (growing with memory), 1.7–1.9 s of NAR and 0.3 s of decode: **27–30% of the GPU**. CFG (two branches, batched) adds almost nothing (0.82 s).
+- Joins are inaudible by the flux test: seam z ≈ 0 against the stream's own flux, 0–3% of joins above its 95th percentile. The beat carries across a join as well as across a mid-chunk point (beat-grid onset ratio 2–3 both ways).
+- No chunk left the corpus latent range (6.5–9.5), in 900+ chunks.
+
+Memory (how much history each chunk sees):
+
+| memory | constant style, 3 min | 6 min |
+|---|---|---|
+| 125–1000 tokens (5–40 s) | stays itself (no chunk heard as another style) | 500: steady, CLAP to its reference 0.82 first third, 0.84 last |
+| 2000 (80 s) | **ends**: at ~110 s it plays an ending, then near-silence (−32 LUFS, −inf) | |
+
+With 80 s behind it the model hears a song that has run its course. 5–40 s of memory never ends.
+
+Tempo: with no score the "N bpm" in the style text is not held (folk asked at 92 came out 63/96/185 or 117; synth asked at 118, 161).
+
+**A style change barely moves a continuing stream.** On a tour of folk, synth, metal, lo-fi (40 s each), swapping the style text:
+
+| lever | new style heard (share of its chunks) | changes reached within 40 s |
+|---|---|---|
+| plain, memory 125 / 250 / 500 / 1000 / 2000 | 32 / 22 / 7 / 0 / 0% | 43 / 38 / 29 / 0 / 0% |
+| CFG 1.5 / 2 / 3 (the negative is the same history without the tags) | 19–41% | 25–62%, erratic, sometimes the wrong style |
+| **bridge** (below), memory 250 / 500 | **75 / 69%** | **100%** |
+
+Folk to synth never arrived plainly at any memory. The history wins even at 5 s, so a style change needs structure, not a stronger prompt:
+
+**The bridge.** At a change, sample a fresh 10 s clip of the new style (no history, 0.74 s), then `splice()` a 10 s transition from the old music into it (4 candidates scored by how well the fresh clip follows, 3.4 s), and carry on from the fresh clip. Every one of 16 changes was heard as the new style from the fresh clip on; the transition chunk is still the old style. The cost: the join into the fresh clip has the stream's only rhythm break. The beat carries into the bridge (onset ratio 3.65) but not out of it (1.29, random phase): the fresh clip comes in at its own tempo and phase.
+
+## 8. A score holds the tempo, in songs and in streams
+
+One score (exp1's folk and rock, cot full with the ABC supplied) in five styles x two seeds (`exp6.py`, tables `exp6_shared_score.md`):
+- Every render keeps the score's tempo: folk 89.1 bpm against `Q:1/4=90`, rock 129.2 against `Q:1/4=65` (double time).
+- Two renders differ by an **offset** (the intro's length), not a drift. After one shift (the median lag of a windowed cross-correlation of the vocal stems' onsets), 88% of folk pairs line up within 50 ms. 6 of 10 rock renders line up within 25 ms of each other; the other 4 drift somewhere mid-song, so a render needs an alignment check before it is used as a layer.
+- **Harmony carries:** a vocal against another style's backing of the same score is as consonant as against its own (chroma cosine over sung frames 0.525 against 0.526; another song's backing 0.388).
+
+An endless stream under a score (exp5c: every chunk's prefix carries the folk score, the style text tours synth, metal, jazz, orchestral): the tempogram of every stream peaks at 89 in both halves, through style changes and bridges. A change moves the sound, though less than without a score (CLAP metal-minus-synth from −0.37 to about −0.15, against a flat −0.35 constant). A fresh clip under a score starts from the top of the score.
+
+## 9. Stems: separation, not the model
+
+YuE2 has no stems: one mixed token per frame and one latent. The score is two-voice (`V: Vocal`, `V: Ins`, chords), so the vocal line is separate symbolically.
+
+htdemucs_ft (MIT code and weights; `sep.py`) on YuE2's output:
+- **37 ms per audio second** on a 4090 (27x realtime): a 10 s chunk in 0.37 s.
+- The vocal stem is clean: Whisper large-v3 hears 73 words a song on it, 94% of them the lyrics, against 28 words (79%) on the mix.
+- Instrumental streams leave −8 to −23 dB in the vocal stem (metal −60), all wordless (Whisper: "♪" only): vocalise or leakage, not lyrics.
+
+A sung endless stream (the lyrics in every chunk's prefix, memory 500) walks the lyric sheet roughly in order (verse, pre-chorus, chorus, second verse by 100 s), then past the sheet it makes up lines ("We are the one", "Tomorrow starts through").
+
+## Continuous streaming: what this means for the design
+
+- **The stream is chunks, not songs.** 10 s chunks with 5–40 s of memory are seamless, never end, and cost under a third of the GPU, so two or three branches can be built ahead of a listener.
+- **Moving through styles is a bridge, not a prompt edit.** Swapping the text does not move the music; a fresh clip plus a spliced transition always does, about 4.2 s of semantic sampling plus the two chunks' NAR, one chunk (10 s) after the request unless built ahead along a path.
+- **The beat across a bridge is the open problem.** A score fixes the tempo (exp6, exp5c), so fresh clips under one score share it. The phase still needs bridges a whole number of bars long (40 ms frames: a 120 bpm bar is 50 frames exactly) and the fresh clip started on the bar.
+- **A vocal layer over a moving backing is feasible.** Same score (tempo and chords), the vocal separated from one render and the backing from another, one shift aligns most pairs; 27x realtime separation keeps it live. Demos for listening: `runs/exp6/demos/*_backing.flac` (folk_orig_s1's and rock_orig_s1's vocal over each other render's backing, shifted).
+- **Not measured yet:** bar-aligned bridges under a score (the phase fix), a rolling lyric sheet (lyrics advance with the stream rather than run out), and whether the scored stream's style moves can be made as decisive as the unscored bridge.
+
 ## Recommended design
 
 **Streaming (brosoundml).** One `Yue2Stream` per song, in one process on one device:
@@ -191,4 +251,5 @@ The NAR L21 steer at ≤ 2 (or NAR L9 for percussion) is a texture knob.
   - Repro: job `soul_ar9-8_s21` in `jobs/exp2c.json`: style "soul, female vocal, Rhodes piano, bass", the corpus lyrics, cot full, seed 21, INT8, steer {layer 9, semantic only, scale −8, `cache/dirs/energy_semantic_L9_e-1.f32`}.
   - Likely cause: non-finite logits reach sampling and produce an out-of-range token index.
 - **B2. An AR steer at |scale| ≥ 3 never ends the song.** It runs to 9000 tokens. A stream needs a cap tied to the plan's length, or an end bias.
-- **B3. `require('./x')` in a `bro-headless <app> script.js` script resolves against the cwd**, not the script's directory, although `docs/brokit-api.js` says it resolves against the calling file.
+- **B3. `require('./x')` in a `bro-headless <app> script.js` script resolves against the cwd**, not the script's directory, although `docs/brokit-api.js` says it resolves against the calling file. (Fixed in bro 6e328841; bin2's scripts require `./lib.js`.)
+- **B4. brotensor's spatial guards (3776145) broke CLAP and Whisper.** They demanded X be exactly (N, C*H*W), and callers hand the same storage over as one row or as a matrix being transposed: every `embedAudio` and `loadWhisper` threw "nchw_to_sequence: shape mismatch". Fixed: the guards check the element count (brotensor 6012b83), and CLAP reshapes its mel image (brosoundml ffab953).
