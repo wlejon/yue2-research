@@ -119,3 +119,15 @@ SONGS = {
     "synthpop": dict(style="synthwave, pop, male vocal, synth, drum machine, 118 bpm", lyrics=LYRICS["neon"]),
     "rock": dict(style="rock, electric guitar, powerful vocal, tight drums, 128 bpm", lyrics=LYRICS["neon"]),
 }
+
+# Exp 5 endless streams: instrumental concepts far apart, so a style change
+# has somewhere to go. Bare sections, no [Outro]: nothing asks for an ending.
+BARE = "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n"
+STREAM_STYLES = {
+    "folk": dict(style="indie folk, acoustic guitar, warm, gentle, 92 bpm", lyrics=BARE),
+    "synth": dict(style="synthwave, synth, drum machine, pads, 118 bpm", lyrics=BARE),
+    "metal": dict(style="heavy metal, distorted electric guitar, double kick drums, aggressive, 140 bpm", lyrics=BARE),
+    "lofi": dict(style="lo-fi hip hop, Rhodes piano, vinyl crackle, laid-back, 80 bpm", lyrics=BARE),
+    # a sung stream: does it keep singing, and which lines?
+    "voice": dict(style="pop, female vocal, piano, tight drums, 100 bpm", lyrics=LYRICS["river"]),
+}

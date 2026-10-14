@@ -15,7 +15,8 @@ JOBS = ROOT / "jobs"
 def write(name, job):
     JOBS.mkdir(exist_ok=True)
     (JOBS / f"{name}.json").write_text(json.dumps(job, indent=1, ensure_ascii=False), encoding="utf-8")
-    print("wrote", JOBS / f"{name}.json", len(job["runs"]), "runs")
+    n = len(job.get("runs", job.get("streams", [])))
+    print("wrote", JOBS / f"{name}.json", n, "runs" if "runs" in job else "streams")
 
 
 def exp1():
@@ -160,6 +161,59 @@ def exp2c(axis="energy", ar_layers="9,15,21", nar_layers="9,15,21", ar_scales="1
                                           steer=[dict(layer=L, nar=True, scale=sc, delta=_nar_avg(axis, L))]))
     write("exp2c" if axis == "energy" else f"exp2c_{axis}",
           dict(out=out, arWeights="int8", vae=True, runs=base + steer))
+
+
+MEMORIES = (125, 250, 500, 1000, 2000)
+
+
+def exp5():
+    """Endless streams (native/endless.js): 10 s chunks, each opened by the
+    last `memory` tokens. Constant styles for coherence and seams, a tour of
+    four styles for how fast a style change is heard, references per style,
+    a 6-minute run for drift, and sung streams for the lyrics."""
+    from prompts import STREAM_STYLES
+    tour = [["folk", 4], ["synth", 4], ["metal", 4], ["lofi", 4], ["folk", 4]]
+    streams = []
+    for m in MEMORIES:
+        for key in ("folk", "synth"):
+            streams.append(dict(name=f"const_{key}_m{m}", memory=m, seed=1, schedule=[[key, 18]]))
+        for seed in (1, 2):
+            streams.append(dict(name=f"tour_m{m}_s{seed}", memory=m, seed=seed, schedule=tour))
+    for key in ("folk", "synth", "metal", "lofi"):
+        for seed in (11, 12):
+            streams.append(dict(name=f"ref_{key}_s{seed}", memory=500, seed=seed, schedule=[[key, 12]]))
+    streams.append(dict(name="long_folk_m500", memory=500, seed=3, schedule=[["folk", 36]]))
+    for m in (500, 1000):
+        streams.append(dict(name=f"voice_m{m}", memory=m, seed=1, schedule=[["voice", 18]]))
+    write("exp5", dict(out="runs/exp5", arWeights="int8", styles=STREAM_STYLES, streams=streams))
+
+
+SCORE_STYLES = {
+    "orig": "{base}",
+    "synth": "synthwave, synth, drum machine, {voice}, {bpm} bpm",
+    "jazz": "jazz-funk, Rhodes piano, groovy bass, {voice}, {bpm} bpm",
+    "metal": "heavy metal, distorted electric guitar, {voice}, {bpm} bpm",
+    "orch": "orchestral, strings, piano, {voice}, {bpm} bpm",
+}
+
+
+def exp6():
+    """One score, many styles: exp1's folk and rock scores (cot full, the
+    ABC supplied, so the plan stage is skipped) rendered in five styles x two
+    seeds, for beat alignment and harmony across renders (exp6.py, after
+    separation)."""
+    from prompts import LYRICS
+    src = {"folk": ("runs/exp1/folk_gen_W0", LYRICS["river"], "female vocal", 92),
+           "rock": ("runs/exp1/rock_gen_W0", LYRICS["neon"], "powerful vocal", 128)}
+    runs = []
+    for song, (d, lyrics, voice, bpm) in src.items():
+        pj = json.loads((ROOT / d / "plan.json").read_text(encoding="utf-8"))
+        for key, fmt in SCORE_STYLES.items():
+            style = fmt.format(base=pj["style"], voice=voice, bpm=bpm)
+            for seed in (1, 2):
+                runs.append(dict(name=f"{song}_{key}_s{seed}", style=style, lyrics=lyrics, cot="full",
+                                 abc=pj["abc"], seed=seed))
+    write("exp6", dict(out="runs/exp6", arWeights="int8", vae=True, runs=runs))
 
 
 if __name__ == "__main__":

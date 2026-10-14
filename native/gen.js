@@ -11,9 +11,11 @@
 //               "steer": [{ "layer", "nar", "scale", "delta": "path.f32", ... }],
 //               "capture": { "layers": [...], "plan", "semantic", "narEvals": [...] },
 //               "keepHidden": false, "decodeFirstFrames", "decodeCoreFrames", "saveAudio": true } ] }
-// A headless script's own require resolves against the working directory
-// (the repo root), not the script's directory: see FINDINGS "bugs found".
-const L = require('./native/lib.js');
+// bin/'s bro resolves a headless script's require against the working
+// directory (the repo root; FINDINGS "bugs found", B3), bin2/'s against the
+// script's directory.
+let L;
+try { L = require('./lib.js'); } catch (e) { L = require('./native/lib.js'); }
 const { fs, now, writeBin, writeJson, mkdirp } = L;
 
 const job = L.readJob();

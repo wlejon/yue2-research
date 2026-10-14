@@ -6,6 +6,8 @@ runs/
 corpus/
 # bro-headless snapshot (bro 87b92fb1, brosoundml ea4146a; built 2026-10-11 22:52)
 bin/
+# second snapshot for exp5+ (bro fa2e8a81, brosoundml 92bdee3; built 2026-10-13 23:41)
+bin2/
 *.wav
 *.flac
 *.mp3

@@ -1,0 +1,10 @@
+{
+ "out": "runs/exp5_smoke", "arWeights": "int8",
+ "styles": {
+  "folk": { "style": "indie folk, acoustic guitar, warm, gentle, 92 bpm", "lyrics": "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n" },
+  "synth": { "style": "synthwave, synth, drum machine, pads, 118 bpm", "lyrics": "[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n" }
+ },
+ "streams": [
+  { "name": "m250", "memory": 250, "seed": 1, "schedule": [["folk", 2], ["synth", 2]] }
+ ]
+}
