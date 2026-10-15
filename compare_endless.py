@@ -41,7 +41,8 @@ def main(a, b):
             sa, sb = np.array(ra.get('scores', [])), np.array(rb.get('scores', []))
             if sa.shape != sb.shape or (len(sa) and np.abs(sa - sb).max() > 1e-6):
                 notes.append('scores %s/%s' % (sa, sb))
-        if (ra.get('lyrics') or '') != (rb.get('lyrics') or ''):
+        # yue.endless rows carry no sheet since the stream went instrumental.
+        if 'lyrics' in ra and 'lyrics' in rb and (ra['lyrics'] or '') != (rb['lyrics'] or ''):
             notes.append('lyrics differ')
         if ra.get('heardText') != rb.get('heardText'):
             notes.append('heard %r/%r' % (ra.get('heardText'), rb.get('heardText')))

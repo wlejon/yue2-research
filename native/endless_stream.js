@@ -11,13 +11,11 @@
 //   changeMemory                   changeMode 'drop' at that memory
 //   bridge + phaseFrom 'bridge' + keepProbe + beatSensor 'spectral'
 //                                  changeMode 'auto' under a score (the stream's bridge)
-//   lyricsRoll { lines | sheet, window, adaptive }
-//                                  the sheet rolled by the model's own lyric
-//                                  pointer (attention head 14.10, FINDINGS 11);
-//                                  each chunk's reading (words, pointer, mass,
-//                                  lines reached) goes into its chunks.json row
-// Anything else (fixed-rate rolls, energy or latent beat sensors, trims by
-// NLL) is not the stream's and is refused.
+// The stream is instrumental: a style's lyric sheet is dropped (its prompt
+// carries YuE2's instrumental sheet, as the non-lyric styles send), and a
+// lyricsRoll stream is refused (exp8 / exp9 ran on brosoundml e3e81eb, the
+// last stream with rolled lyrics). Anything else (energy or latent beat
+// sensors, trims by NLL) is not the stream's and is refused.
 //
 //   YUE_JOB=jobs/endless_check.json YUE_OUT=runs/endless_check/stream \
 //       bro-headless native native/endless_stream.js
@@ -31,20 +29,23 @@ const yue = L.loadYue(job.arWeights);
 const vae = L.loadVae();
 
 
+// The stream sings no lyrics: every chunk's prompt carries YuE2's instrumental
+// sheet, which is what the non-lyric styles send. A style with a sung sheet
+// runs instrumental (said once per style).
+const INSTRUMENTAL = '[Intro]\n\n[Instrumental]\n\n[Interlude]\n\n[Instrumental]\n';
+const dropped = new Set();
 function targetOf(st, key) {
     const s = job.styles[key];
-    const t = { style: s.style, score: s.abc || null, lyrics: s.lyrics, roll: false, tag: key };
-    if (st.lyricsRoll) {
-        if (!st.lyricsRoll.adaptive) throw new Error(st.name + ': only adaptive lyric rolls are the stream\'s');
-        t.lyrics = (st.lyricsRoll.sheet ? job.sheets[st.lyricsRoll.sheet] : st.lyricsRoll.lines).join('\n');
-        t.roll = true;
-        t.lyricWindow = st.lyricsRoll.window;
+    if (s.lyrics && s.lyrics !== INSTRUMENTAL && !dropped.has(key)) {
+        dropped.add(key);
+        console.log(key + ': its lyric sheet is dropped, the stream is instrumental');
     }
-    return t;
+    return { style: s.style, score: s.abc || null, tag: key };
 }
 
 function optionsOf(st) {
     const C = st.chunk || 250;
+    if (st.lyricsRoll) throw new Error(st.name + ': the stream has no lyrics to roll (exp8/exp9 ran on brosoundml e3e81eb)');
     const o = {
         vae, paced: false, chunkData: true, retarget: false,
         chunkFrames: C, memory: st.memory, lookahead: st.lookahead === undefined ? 25 : st.lookahead,
@@ -92,7 +93,7 @@ for (const st of job.streams) {
     opts.onEvent = (e) => {
         if (e.kind === 'sampled') tokens.set(e.tokens, e.chunk * C);
         if (e.kind === 'built') { lat.set(e.latents, e.frame0 * 64); rows[e.chunk] = e.row; }
-        if (e.kind === 'lyrics' || e.kind === 'phaseFit') rows[e.chunk] = Object.assign(rows[e.chunk] || {}, e.row);
+        if (e.kind === 'phaseFit') rows[e.chunk] = Object.assign(rows[e.chunk] || {}, e.row);
         if (e.kind === 'error') errors.push(e.text);
         if (e.kind !== 'sampled' && e.kind !== 'built' && e.kind !== 'chunkStart')
             events.push({ kind: e.kind, chunk: e.chunk, text: e.text, value: e.value, t: now() - t0 });
@@ -113,24 +114,16 @@ for (const st of job.streams) {
     const chunks = rows.map((r, k) => {
         const o = { k, style: order[k], f0: k * C, f1: (k + 1) * C, spliceSeconds: r.spliceSeconds,
                     inpaintSeconds: r.inpaintSeconds, narWindow: r.narWindow, latentNorm: r.latentNorm,
-                    memory: r.memory, lyrics: r.lyrics };
+                    memory: r.memory };
         if (r.probeRender) o.probeRender = true;
         if (r.how === 'bridge') { o.bridge = true; o.scores = Array.from(r.bridgeScores || []); }
         if (r.how === 'fresh') { o.fresh = true; o.trim = r.trim; o.phaseFit = r.phaseFit; }
-        if (r.lyricLines) o.lyricLines = r.lyricLines;
-        if (r.lyricWords) {
-            o.lyricWords = Array.from(r.lyricWords);
-            o.lyricWordLines = Array.from(r.lyricWordLines);
-            o.pointer = Array.from(r.pointer);
-            o.pointerMass = Array.from(r.pointerMass, (m) => Math.round(m * 1e5) / 1e5);
-            o.linesReached = Array.from(r.linesReached);
-        }
         return o;
     });
     writeJson(dir + '/chunks.json', {
         name: st.name, memory: st.memory, chunk: C, lookahead: opts.lookahead, narLeft: opts.narLeft,
         cot: st.cot || 'off', seed: opts.seed, odeSteps: opts.odeSteps, cfgScale: st.cfgScale, bridge: !!st.bridge,
-        changeMemory: st.changeMemory, lyricsRoll: st.lyricsRoll, frames: K * C, audioFrames: a.frames, wall,
+        changeMemory: st.changeMemory, frames: K * C, audioFrames: a.frames, wall,
         source: 'yue.endless', programSamples: emitted, programContiguous: contiguous,
         stats: { work: s.stats.work, worstGapSeconds: s.stats.worstGapSeconds, costSeconds: s.stats.costSeconds },
         events, schedule: st.schedule, chunks,

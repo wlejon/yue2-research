@@ -8,18 +8,20 @@
 // stream's service gaps go to <out>/paced.json, the program audio to
 // <out>/program.f32 (planar L then R).
 //
-//   YUE_PACED=lyrics|score YUE_OUT=runs/endless_check/paced_lyrics \
+//   YUE_PACED=branches|score YUE_OUT=runs/endless_check/paced_branches \
 //       bro-headless native native/endless_paced.js
 //
-// lyrics: the exp7b voice style singing the 51-line sheet rolled (by the
-//   model's own lyric pointer, head 14.10), changed to synth, knobs, a branch to metal
+// The stream is instrumental (no lyrics: exp9's rolled-lyrics paced runs were
+// brosoundml e3e81eb's 'lyrics' mode).
+// branches: the exp7b voice style, changed to synth, knobs, a branch to metal
 //   committed, a branch to lofi discarded, back to folk; 4 minutes.
 // score: the exp7h folk score as synth, then metal, jazz and orchestral, each
 //   change a measured bridge; 3 minutes.
 const L = require('./lib.js');
 const { fs, now, writeBin, writeJson, mkdirp } = L;
 
-const mode = process.env.YUE_PACED || 'lyrics';
+const mode = process.env.YUE_PACED || 'branches';
+if (mode !== 'branches' && mode !== 'score') throw new Error('YUE_PACED must be branches or score');
 const out = L.abs(process.env.YUE_OUT || 'runs/endless_check/paced_' + mode);
 mkdirp(out);
 const jobs = { b: JSON.parse(fs.readFileSync(L.abs('jobs/exp7b.json'), 'utf8')),
@@ -33,11 +35,9 @@ const log = [], controls = [];
 function control(at, what, fn) { controls.push({ at, what, fn, done: false }); }
 
 let opts, total;
-if (mode === 'lyrics') {
-    const roll = jobs.b.streams.find((s) => s.name === 'roll_adapt_w4');
+if (mode === 'branches') {
     const sty = (k) => jobs.b.styles[k].style;
-    opts = { memory: 500,
-             target: { style: sty('voice'), lyrics: roll.lyricsRoll.lines.join('\n'), roll: true, lyricWindow: 4, tag: 'voice' } };
+    opts = { memory: 500, target: { style: sty('voice'), tag: 'voice' } };
     let br1 = -1, br2 = -1;
     control(40, 'setTarget synth', () => st.setTarget({ style: sty('synth'), tag: 'synth' }));
     control(70, 'setKnobs energy 0.6 texture 1', () => st.setKnobs({ energy: 0.6, texture: 1 }));
@@ -49,7 +49,7 @@ if (mode === 'lyrics') {
     total = 240;
 } else {
     const sty = jobs.h.styles;
-    const t = (k) => ({ style: sty[k].style, score: sty[k].abc, lyrics: sty[k].lyrics, tag: k });
+    const t = (k) => ({ style: sty[k].style, score: sty[k].abc, tag: k });
     opts = { memory: 250, target: t('score_synth') };
     control(30, 'setTarget score_metal', () => st.setTarget(t('score_metal')));
     control(70, 'setTarget score_jazz', () => st.setTarget(t('score_jazz')));
@@ -110,11 +110,9 @@ opts.onAudio = (a) => {
 opts.onEvent = (e) => {
     const r = { kind: e.kind, chunk: e.chunk, branch: e.branch, tag: e.tag, sample: e.sample, value: e.value,
                 text: e.text, wall: now() - t0, playhead: played() / SR };
-    if (e.row && (e.kind === 'built' || e.kind === 'lyrics'))
+    if (e.row && e.kind === 'built')
         Object.assign(r, { how: e.row.how, memory: e.row.memory, retargeted: e.row.retargeted,
-                           linesReached: e.row.linesReached, lyricLines: e.row.lyricLines, spliceSeconds: e.row.spliceSeconds,
-                           inpaintSeconds: e.row.inpaintSeconds });
-    if (e.kind === 'lyrics') r.text = 'reached ' + e.row.linesReached.join(',') + ' of [' + e.row.lyricLines.join(', ') + ')';
+                           spliceSeconds: e.row.spliceSeconds, inpaintSeconds: e.row.inpaintSeconds });
     if (e.row && e.row.phaseFit) r.phaseFit = e.row.phaseFit;
     log.push(r);
     if (e.kind !== 'chunkStart' && e.kind !== 'sampled' && e.kind !== 'built')
@@ -181,8 +179,7 @@ const summary = {
     underrunSeconds: ss ? (ss.underrunFrames - Math.max(0, underrunAtFirst)) / ER : null, engineRate: ER,
     worstGapSeconds: stats.worstGapSeconds, gaps: stats.gaps, work: stats.work, cost: stats.costSeconds,
     maxJsTickMs: maxTick, stallTicks, controls, done,
-    chunks: stats.chunks.map((c) => ({ index: c.index, tag: c.tag, how: c.how, memory: c.memory, retargeted: c.retargeted,
-                                       linesReached: c.linesReached, lyricLines: c.lyricLines })),
+    chunks: stats.chunks.map((c) => ({ index: c.index, tag: c.tag, how: c.how, memory: c.memory, retargeted: c.retargeted })),
 };
 writeJson(out + '/paced.json', Object.assign({}, summary, { events: log }));
 console.log(JSON.stringify(Object.assign({}, summary, { chunks: undefined, stallTicks: stallTicks.length }), null, 1));
