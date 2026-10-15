@@ -11,8 +11,8 @@
 //   YUE_PACED=lyrics|score YUE_OUT=runs/endless_check/paced_lyrics \
 //       bro-headless native native/endless_paced.js
 //
-// lyrics: the exp7b voice style singing the 51-line sheet rolled (Whisper
-//   listens in the stream), changed to synth, knobs, a branch to metal
+// lyrics: the exp7b voice style singing the 51-line sheet rolled (by the
+//   model's own lyric pointer, head 14.10), changed to synth, knobs, a branch to metal
 //   committed, a branch to lofi discarded, back to folk; 4 minutes.
 // score: the exp7h folk score as synth, then metal, jazz and orchestral, each
 //   change a measured bridge; 3 minutes.
@@ -36,11 +36,7 @@ let opts, total;
 if (mode === 'lyrics') {
     const roll = jobs.b.streams.find((s) => s.name === 'roll_adapt_w4');
     const sty = (k) => jobs.b.styles[k].style;
-    const wd = process.env.WHISPER || 'D:/projects/brosoundml/weights/whisper-large-v3';
-    const whisper = bro.stt.loadWhisper(wd);
-    const whisperTokenizer = bro.stt.loadTokenizer({ vocabPath: wd + '/vocab.json', mergesPath: wd + '/merges.txt',
-                                                     addedTokensPath: wd + '/added_tokens.json' });
-    opts = { memory: 500, whisper, whisperTokenizer,
+    opts = { memory: 500,
              target: { style: sty('voice'), lyrics: roll.lyricsRoll.lines.join('\n'), roll: true, lyricWindow: 4, tag: 'voice' } };
     let br1 = -1, br2 = -1;
     control(40, 'setTarget synth', () => st.setTarget({ style: sty('synth'), tag: 'synth' }));
@@ -101,6 +97,7 @@ function played() {
 
 let done = null, t0 = now(), tFirst = -1;
 opts.vae = vae;
+if (process.env.YUE_AHEAD) opts.aheadSeconds = +process.env.YUE_AHEAD;   // the least sample lead (s)
 opts.onAudio = (a) => {
     if (a.sample0 !== pushed) contiguous = false;
     const l = a.samples.slice(0, a.frames), r = a.samples.slice(a.frames, 2 * a.frames);
@@ -113,15 +110,16 @@ opts.onAudio = (a) => {
 opts.onEvent = (e) => {
     const r = { kind: e.kind, chunk: e.chunk, branch: e.branch, tag: e.tag, sample: e.sample, value: e.value,
                 text: e.text, wall: now() - t0, playhead: played() / SR };
-    if (e.row && (e.kind === 'built' || e.kind === 'heard'))
-        Object.assign(r, { how: e.row.how, memory: e.row.memory, retargeted: e.row.retargeted, heardText: e.row.heardText,
-                           heardLines: e.row.heardLines, lyricLines: e.row.lyricLines, spliceSeconds: e.row.spliceSeconds,
-                           inpaintSeconds: e.row.inpaintSeconds, listenSeconds: e.row.listenSeconds });
+    if (e.row && (e.kind === 'built' || e.kind === 'lyrics'))
+        Object.assign(r, { how: e.row.how, memory: e.row.memory, retargeted: e.row.retargeted,
+                           linesReached: e.row.linesReached, lyricLines: e.row.lyricLines, spliceSeconds: e.row.spliceSeconds,
+                           inpaintSeconds: e.row.inpaintSeconds });
+    if (e.kind === 'lyrics') r.text = 'reached ' + e.row.linesReached.join(',') + ' of [' + e.row.lyricLines.join(', ') + ')';
     if (e.row && e.row.phaseFit) r.phaseFit = e.row.phaseFit;
     log.push(r);
     if (e.kind !== 'chunkStart' && e.kind !== 'sampled' && e.kind !== 'built')
         console.log(r.playhead.toFixed(1).padStart(6) + ' s  ' + e.kind + ' chunk ' + e.chunk + ' ' + (e.tag || '') +
-                    (e.text ? ' "' + String(e.text).slice(0, 80).replace(/\n/g, ' / ') + '"' : '') +
+                    (r.text ? ' "' + String(r.text).slice(0, 80).replace(/\n/g, ' / ') + '"' : '') +
                     (e.kind === 'planned' ? ' heard at ' + (e.sample / SR).toFixed(1) + ' s' : ''));
 };
 opts.onDone = (i) => { done = i; };
@@ -184,7 +182,7 @@ const summary = {
     worstGapSeconds: stats.worstGapSeconds, gaps: stats.gaps, work: stats.work, cost: stats.costSeconds,
     maxJsTickMs: maxTick, stallTicks, controls, done,
     chunks: stats.chunks.map((c) => ({ index: c.index, tag: c.tag, how: c.how, memory: c.memory, retargeted: c.retargeted,
-                                       heard: c.heardText, lyricLines: c.lyricLines })),
+                                       linesReached: c.linesReached, lyricLines: c.lyricLines })),
 };
 writeJson(out + '/paced.json', Object.assign({}, summary, { events: log }));
 console.log(JSON.stringify(Object.assign({}, summary, { chunks: undefined, stallTicks: stallTicks.length }), null, 1));

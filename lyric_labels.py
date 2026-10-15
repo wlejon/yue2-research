@@ -21,7 +21,7 @@ import numpy as np
 import torch
 
 EXP7 = Path(os.environ.get("RUNS", "runs/exp7"))     # RUNS=runs/exp8/streams for the fresh streams
-OUT = Path("runs/exp8/labels")
+OUT = Path(os.environ.get("LABELS", "runs/exp8/labels"))
 FPS = 25
 
 

@@ -30,8 +30,8 @@ import torch
 
 EXP7 = Path(os.environ.get("RUNS", "runs/exp7"))     # RUNS + JOB: runs/exp8/streams + jobs/exp8.json
 JOB = Path(os.environ.get("JOB", "jobs/exp7.json"))
-LABELS = Path("runs/exp8/labels")
-TRACK = Path("runs/exp8/track")
+LABELS = Path(os.environ.get("LABELS", "runs/exp8/labels"))
+TRACK = Path(os.environ.get("TRACK", "runs/exp8/track"))
 RES_LAYERS = list(range(1, 28, 2))      # residual after layers 1, 3, ..., 27
 LAGS = range(-12, 13, 2)
 
@@ -361,5 +361,61 @@ def check(runs, head=(14, 10), lag=-2):
     roll(runs, head)
 
 
+def reached(ptr, mass, line, gate=0.2):
+    """Lines (of `line`'s values) the head reached: 60% of their words pointed
+    at for 2+ frames, counting frames with lyric mass >= gate (as roll())."""
+    cnt = np.bincount(ptr[mass >= gate], minlength=len(line))
+    return [l for l in sorted(set(line.tolist())) if (cnt[line == l] >= 2).mean() >= 0.6]
+
+
+def parity(runs, head=(14, 10)):
+    """The native stream's own lyric pointer (yue.endless, int8 AR weights,
+    read while sampling: chunks.json pointer / linesReached) against this
+    teacher-forced bf16 extraction on the same tokens and windows."""
+    li, h = head
+    out = ["", f"## Native lyric pointer vs the bf16 reference, head {li}.{h} ({EXP7})", "",
+           "| stream | chunks | frames | same word | same line | words compared | chunks with the same lines reached | same furthest line |",
+           "|---|---|---|---|---|---|---|---|"]
+    tot = np.zeros(6)
+    all_words = True
+    for run in runs + ["all"]:
+        if run == "all":
+            k, n, same, sline, rs, rf = tot
+            words_ok = "all" if all_words else "MISMATCH"
+        else:
+            info = json.loads((EXP7 / run / "chunks.json").read_text(encoding="utf-8"))["chunks"]
+            k = n = same = sline = rs = rf = 0
+            words_ok = True
+            for c in info:
+                if "pointer" not in c:
+                    continue
+                z = np.load(TRACK / run / f"{c['k']}.npz")
+                if list(z["words"]) != c["lyricWords"]:
+                    words_ok = all_words = False
+                    print(f"{run} {c['k']}: words differ: {list(z['words'])[:6]} / {c['lyricWords'][:6]}")
+                    continue
+                att = z["att"][li, h].astype(np.float32)                  # R, W
+                ref = att.argmax(-1)
+                nat = np.array(c["pointer"])
+                line = z["line"]
+                a = c["lyricLines"][0]
+                same += (ref == nat).sum()
+                sline += (line[ref] == line[nat]).sum()
+                n += len(nat)
+                rr = [a + l for l in reached(ref, att.sum(-1), line)]
+                nr = c["linesReached"]
+                rs += rr == nr
+                rf += max(rr, default=-1) == max(nr, default=-1)
+                k += 1
+            words_ok = "all" if words_ok else "MISMATCH"
+            tot += (k, n, same, sline, rs, rf)
+        out.append(f"| {run} | {int(k)} | {int(n)} | {same / max(n, 1):.1%} | {sline / max(n, 1):.1%} | {words_ok} | "
+                   f"{int(rs)}/{int(k)} | {int(rf)}/{int(k)} |")
+        print(out[-1], flush=True)
+    Path("tables").mkdir(exist_ok=True)
+    with open(os.environ.get("TABLE", "tables/exp9_lyric_head.md"), "a", encoding="utf-8") as f:
+        f.write("\n".join(out) + "\n")
+
+
 if __name__ == "__main__":
-    {"extract": extract, "eval": evaluate, "roll": roll, "check": check}[sys.argv[1]](sys.argv[2:])
+    {"extract": extract, "eval": evaluate, "roll": roll, "check": check, "parity": parity}[sys.argv[1]](sys.argv[2:])

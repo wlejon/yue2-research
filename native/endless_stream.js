@@ -11,8 +11,11 @@
 //   changeMemory                   changeMode 'drop' at that memory
 //   bridge + phaseFrom 'bridge' + keepProbe + beatSensor 'spectral'
 //                                  changeMode 'auto' under a score (the stream's bridge)
-//   lyricsRoll { lines, window, adaptive }
-//                                  the sheet rolled (Whisper large-v3 listens)
+//   lyricsRoll { lines | sheet, window, adaptive }
+//                                  the sheet rolled by the model's own lyric
+//                                  pointer (attention head 14.10, FINDINGS 11);
+//                                  each chunk's reading (words, pointer, mass,
+//                                  lines reached) goes into its chunks.json row
 // Anything else (fixed-rate rolls, energy or latent beat sensors, trims by
 // NLL) is not the stream's and is refused.
 //
@@ -27,20 +30,13 @@ const only = process.env.YUE_ONLY ? new Set(process.env.YUE_ONLY.split(',')) : n
 const yue = L.loadYue(job.arWeights);
 const vae = L.loadVae();
 
-let whisper = null, whisperTok = null;
-if (job.streams.some((st) => st.lyricsRoll)) {
-    const wd = process.env.WHISPER || 'D:/projects/brosoundml/weights/whisper-large-v3';
-    whisper = bro.stt.loadWhisper(wd);
-    whisperTok = bro.stt.loadTokenizer({ vocabPath: wd + '/vocab.json', mergesPath: wd + '/merges.txt',
-                                         addedTokensPath: wd + '/added_tokens.json' });
-}
 
 function targetOf(st, key) {
     const s = job.styles[key];
     const t = { style: s.style, score: s.abc || null, lyrics: s.lyrics, roll: false, tag: key };
     if (st.lyricsRoll) {
         if (!st.lyricsRoll.adaptive) throw new Error(st.name + ': only adaptive lyric rolls are the stream\'s');
-        t.lyrics = st.lyricsRoll.lines.join('\n');
+        t.lyrics = (st.lyricsRoll.sheet ? job.sheets[st.lyricsRoll.sheet] : st.lyricsRoll.lines).join('\n');
         t.roll = true;
         t.lyricWindow = st.lyricsRoll.window;
     }
@@ -72,7 +68,6 @@ function optionsOf(st) {
         k += n;
     }
     o.maxChunks = k;
-    if (whisper && st.lyricsRoll) { o.whisper = whisper; o.whisperTokenizer = whisperTok; }
     return o;
 }
 
@@ -97,7 +92,7 @@ for (const st of job.streams) {
     opts.onEvent = (e) => {
         if (e.kind === 'sampled') tokens.set(e.tokens, e.chunk * C);
         if (e.kind === 'built') { lat.set(e.latents, e.frame0 * 64); rows[e.chunk] = e.row; }
-        if (e.kind === 'heard' || e.kind === 'phaseFit') rows[e.chunk] = Object.assign(rows[e.chunk] || {}, e.row);
+        if (e.kind === 'lyrics' || e.kind === 'phaseFit') rows[e.chunk] = Object.assign(rows[e.chunk] || {}, e.row);
         if (e.kind === 'error') errors.push(e.text);
         if (e.kind !== 'sampled' && e.kind !== 'built' && e.kind !== 'chunkStart')
             events.push({ kind: e.kind, chunk: e.chunk, text: e.text, value: e.value, t: now() - t0 });
@@ -123,7 +118,13 @@ for (const st of job.streams) {
         if (r.how === 'bridge') { o.bridge = true; o.scores = Array.from(r.bridgeScores || []); }
         if (r.how === 'fresh') { o.fresh = true; o.trim = r.trim; o.phaseFit = r.phaseFit; }
         if (r.lyricLines) o.lyricLines = r.lyricLines;
-        if (r.heardText !== undefined) { o.heardText = r.heardText; o.heardLines = r.heardLines; o.listenSeconds = r.listenSeconds; }
+        if (r.lyricWords) {
+            o.lyricWords = Array.from(r.lyricWords);
+            o.lyricWordLines = Array.from(r.lyricWordLines);
+            o.pointer = Array.from(r.pointer);
+            o.pointerMass = Array.from(r.pointerMass, (m) => Math.round(m * 1e5) / 1e5);
+            o.linesReached = Array.from(r.linesReached);
+        }
         return o;
     });
     writeJson(dir + '/chunks.json', {
